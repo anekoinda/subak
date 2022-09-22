@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Subak Bali</string>
+    <string name="background">background</string>
+    <string name="logo_subak">logo_subak</string>
+    <string name="empty_password">Password cannot be empty</string>
+    <string name="incorrect_password">Password must be at least 6 character in length</string>
+    <string name="empty_email">Email cannot be empty</string>
+    <string name="incorrect_email">Incorrect email format</string>
 </resources>
