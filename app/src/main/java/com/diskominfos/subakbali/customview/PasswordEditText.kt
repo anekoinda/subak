@@ -124,13 +124,13 @@ class PasswordEditText: AppCompatEditText, View.OnTouchListener {
     }
 
     private fun validate() {
-        when {
-            isEmpty() -> {
-                error = context.getString(R.string.empty_password)
-            }
-            isInvalidPassword() ->
-                error = context.getString(R.string.incorrect_password)
-        }
+//        when {
+//            isEmpty() -> {
+//                error = context.getString(R.string.empty_password)
+//            }
+//            isInvalidPassword() ->
+//                error = context.getString(R.string.incorrect_password)
+//        }
     }
 
     private fun isInvalidPassword(): Boolean {
@@ -138,8 +138,8 @@ class PasswordEditText: AppCompatEditText, View.OnTouchListener {
         if (length != null) return length < 6
         return false
     }
-
-    private fun isEmpty(): Boolean {
-        return text.isNullOrEmpty()
-    }
+//
+//    private fun isEmpty(): Boolean {
+//        return text.isNullOrEmpty()
+//    }
 }

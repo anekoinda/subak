@@ -2,6 +2,7 @@ package com.diskominfos.subakbali.customview
 import android.content.Context
 import android.graphics.Canvas
 import android.text.Editable
+import android.text.TextUtils.isEmpty
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Patterns
@@ -50,22 +51,22 @@ class EmailEditText : AppCompatEditText, View.OnTouchListener {
     }
 
     private fun validate() {
-        when {
-            isEmpty() -> {
-                error = context.getString(R.string.empty_email)
-            }
-            isInvalidEmail() ->
-                error = context.getString(R.string.incorrect_email)
-        }
+//        when {
+//            isEmpty() -> {
+//                error = context.getString(R.string.empty_email)
+//            }
+//            isInvalidEmail() ->
+//                error = context.getString(R.string.incorrect_email)
+//        }
     }
 
     private fun isInvalidEmail(): Boolean {
         return !Patterns.EMAIL_ADDRESS.matcher(text.toString()).matches()
     }
 
-    private fun isEmpty(): Boolean {
-        return text.()
-    }
+//    private fun isEmpty(): Boolean {
+//        return text.isNullOrEmpty()
+//    }
 
     override fun onTouch(v: View?, event: MotionEvent): Boolean {
         return false

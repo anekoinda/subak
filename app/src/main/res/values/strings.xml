@@ -6,4 +6,13 @@
     <string name="incorrect_password">Password must be at least 6 character in length</string>
     <string name="empty_email">Email cannot be empty</string>
     <string name="incorrect_email">Incorrect email format</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="data">Data</string>
+    <string name="pemetaan">Pemetaan</string>
+    <string name="profil">Profil</string>
+    <string name="tambah">Tambah</string>
+    <string name="search">Cari subak</string>
 </resources>

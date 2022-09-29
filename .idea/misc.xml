@@ -3,12 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/SubakBali/app/src/main/res/drawable-v24/ic_visibility.xml" value="0.185" />
         <entry key="..\:/Android/SubakBali/app/src/main/res/drawable/bg_radius.xml" value="0.185" />
         <entry key="..\:/Android/SubakBali/app/src/main/res/drawable/custom_button.xml" value="0.185" />
         <entry key="..\:/Android/SubakBali/app/src/main/res/drawable/custom_email_icon.xml" value="0.185" />
+        <entry key="..\:/Android/SubakBali/app/src/main/res/drawable/custom_input.xml" value="0.185" />
         <entry key="..\:/Android/SubakBali/app/src/main/res/drawable/ic_email.xml" value="0.185" />
+        <entry key="..\:/Android/SubakBali/app/src/main/res/drawable/ic_notification.xml" value="0.185" />
+        <entry key="..\:/Android/SubakBali/app/src/main/res/layout/activity_home.xml" value="0.2129115006412997" />
         <entry key="..\:/Android/SubakBali/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
         <entry key="..\:/Android/SubakBali/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android/SubakBali/app/src/main/res/layout/fragment_home.xml" value="0.176" />
+        <entry key="..\:/Android/SubakBali/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2129115006412997" />
       </map>
     </option>
   </component>

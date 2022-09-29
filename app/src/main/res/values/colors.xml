@@ -13,4 +13,5 @@
     <color name="black_font">#2B2B2B</color>
     <color name="dark_grey">#787878</color>
     <color name="light_grey">#D1D1D1</color>
+    <color name="bg_grey">#FAFAFA</color>
 </resources>
