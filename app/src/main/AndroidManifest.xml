@@ -25,7 +25,7 @@
             android:value="AIzaSyDeg6nPljLVx15aYfww-uBrTq9afsNjcN0" />
 
         <activity
-            android:name=".Pemetaan"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
