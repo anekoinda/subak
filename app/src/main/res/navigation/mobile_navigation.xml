@@ -12,14 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.diskominfos.subakbali.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_data"
+        android:name="com.diskominfos.subakbali.ui.data.DataFragment"
+        android:label="@string/title_data"
+        tools:layout="@layout/fragment_data" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.diskominfos.subakbali.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_pemetaaan"
+        android:name="com.diskominfos.subakbali.ui.pemetaan.PemetaanFragment"
+        android:label="@string/title_pemetaan"
+        tools:layout="@layout/fragment_pemetaan" />
+
+    <fragment
+        android:id="@+id/navigation_profil"
+        android:name="com.diskominfos.subakbali.ui.profil.ProfilFragment"
+        android:label="@string/title_profil"
+        tools:layout="@layout/fragment_profil" />
 </navigation>

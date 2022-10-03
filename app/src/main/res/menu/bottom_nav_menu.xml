@@ -22,7 +22,7 @@
         android:title="@string/pemetaan" />
 
     <item
-        android:id="@+id/navigation_"
+        android:id="@+id/navigation_profil"
         android:icon="@drawable/ic_profile"
         android:title="@string/profil" />
 </menu>
