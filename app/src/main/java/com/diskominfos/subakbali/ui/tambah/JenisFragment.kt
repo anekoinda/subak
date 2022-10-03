@@ -1,4 +1,4 @@
-package com.diskominfos.subakbali.ui.profil
+package com.diskominfos.subakbali.ui.tambah
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.diskominfos.subakbali.databinding.FragmentDataBinding
-import com.diskominfos.subakbali.databinding.FragmentProfilBinding
-import com.diskominfos.subakbali.ui.data.DataViewModel
+import com.diskominfos.subakbali.databinding.FragmentJenisBinding
 
-class ProfilFragment : Fragment() {
-    private var _binding: FragmentProfilBinding? = null
+class JenisFragment : Fragment() {
+    private var _binding: FragmentJenisBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,10 +20,10 @@ class ProfilFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profilViewModel =
-            ViewModelProvider(this)[ProfilViewModel::class.java]
+        val jenisViewModel =
+            ViewModelProvider(this)[JenisViewModel::class.java]
 
-        _binding = FragmentProfilBinding.inflate(inflater, container, false)
+        _binding = FragmentJenisBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         return root

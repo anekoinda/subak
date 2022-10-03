@@ -28,4 +28,10 @@
         android:name="com.diskominfos.subakbali.ui.profil.ProfilFragment"
         android:label="@string/title_profil"
         tools:layout="@layout/fragment_profil" />
+
+    <fragment
+        android:id="@+id/navigation_tambah"
+        android:name="com.diskominfos.subakbali.ui.tambah.JenisFragment"
+        android:label="@string/title_tambah"
+        tools:layout="@layout/fragment_jenis" />
 </navigation>
