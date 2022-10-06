@@ -18,7 +18,8 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
 
     suspend fun saveUser(user: String) {
         dataStore.edit { preferences ->
-            preferences[TOKEN] = user.takeLast(40)
+            val token = user.split("|")
+            preferences[TOKEN] = token[1]
             Log.e("cek token", preferences[TOKEN].toString())
         }
     }
