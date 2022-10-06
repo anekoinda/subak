@@ -15,6 +15,6 @@ class UserResponse {
 
         @SerializedName("token")
         @Expose
-        var token: String? = null
+        var token : String? = null
     }
 }
