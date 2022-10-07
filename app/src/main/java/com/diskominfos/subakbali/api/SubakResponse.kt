@@ -28,5 +28,11 @@ data class DataSubak(
     val lng: Double,
 
     @field:SerializedName("lat")
-    val lat: Double
+    val lat: Double,
+
+    @field:SerializedName("nama")
+    val nama: String,
+
+    @field:SerializedName("jenis_subak")
+    val jenis_subak: String
 ) : Parcelable

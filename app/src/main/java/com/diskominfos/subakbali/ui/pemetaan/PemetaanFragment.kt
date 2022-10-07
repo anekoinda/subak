@@ -82,8 +82,8 @@ class PemetaanFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnPolygonClic
                         if (it.lat != null && it.lng != null) {
                             val coordinate = LatLng(it.lat, it.lng)
                             googleMap.addMarker(
-                                MarkerOptions().position(coordinate)
-
+                                MarkerOptions().position(coordinate).title(it.nama)
+                                    .snippet(it.jenis_subak)
                             )
                         }
                     }
