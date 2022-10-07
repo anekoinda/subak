@@ -19,8 +19,7 @@ import com.diskominfos.subakbali.databinding.FragmentProfilBinding
 import com.diskominfos.subakbali.model.UserPreference
 import com.diskominfos.subakbali.model.ViewModelFactory
 
-private val Context.dataStore : DataStore<Preferences> by preferencesDataStore(name = "settings")
-
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class ProfilFragment : Fragment() {
     private var _binding: FragmentProfilBinding? = null
@@ -47,8 +46,9 @@ class ProfilFragment : Fragment() {
         binding.buttonLogout.setOnClickListener {
             val profilViewModel: ProfilViewModel by viewModels {
                 val pref = requireContext().dataStore
-                ViewModelFactory(UserPreference.getInstance(pref),
-                   requireContext()
+                ViewModelFactory(
+                    UserPreference.getInstance(pref),
+                    requireContext()
                 )
             }
             profilViewModel.logout()
