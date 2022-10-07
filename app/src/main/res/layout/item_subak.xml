@@ -33,7 +33,7 @@
                 android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/namaSubak"
+                    android:id="@+id/nama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -43,24 +43,15 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/banjarSubak"
+                    android:id="@+id/jenis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Banjar Tengah"
+                    android:text="Abian"
                     android:textColor="@color/black_font"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/pekasehSubak"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="I Wayan Pasti"
-                    android:textColor="@color/black_font"
-                    android:textSize="12sp" />
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
