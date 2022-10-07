@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.diskominfos.subakbali.R
-import com.diskominfos.subakbali.auth.LoginActivity
+import com.diskominfos.subakbali.ui.auth.LoginActivity
 import com.diskominfos.subakbali.databinding.FragmentPemetaanBinding
 import com.diskominfos.subakbali.model.UserPreference
 import com.diskominfos.subakbali.model.ViewModelFactory

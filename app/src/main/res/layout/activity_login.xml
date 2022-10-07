@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".auth.LoginActivity">
+    tools:context=".ui.auth.LoginActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -58,19 +58,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="500dp"
             android:layout_marginTop="400dp"
             android:background="@drawable/bg_radius"
             android:orientation="vertical"
             android:paddingLeft="16dp"
-            android:paddingTop="32dp"
             android:paddingRight="16dp">
 
             <TextView
                 android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="62dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Login"
                 android:textColor="@color/black"

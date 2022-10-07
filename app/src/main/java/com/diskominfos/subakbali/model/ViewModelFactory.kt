@@ -3,7 +3,7 @@ package com.diskominfos.subakbali.model
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.diskominfos.subakbali.auth.LoginViewModel
+import com.diskominfos.subakbali.ui.auth.LoginViewModel
 import com.diskominfos.subakbali.ui.profil.ProfilFragment
 import com.diskominfos.subakbali.ui.profil.ProfilViewModel
 

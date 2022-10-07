@@ -1,4 +1,4 @@
-package com.diskominfos.subakbali.auth
+package com.diskominfos.subakbali.ui.auth
 
 import android.content.ContentValues
 import android.content.Context
@@ -32,6 +32,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
 
         setupViewModel()
         setupAction()

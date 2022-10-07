@@ -14,7 +14,7 @@ import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.viewModels
-import com.diskominfos.subakbali.auth.LoginActivity
+import com.diskominfos.subakbali.ui.auth.LoginActivity
 import com.diskominfos.subakbali.databinding.FragmentProfilBinding
 import com.diskominfos.subakbali.model.UserPreference
 import com.diskominfos.subakbali.model.ViewModelFactory

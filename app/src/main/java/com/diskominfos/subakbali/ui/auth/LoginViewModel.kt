@@ -1,4 +1,4 @@
-package com.diskominfos.subakbali.auth
+package com.diskominfos.subakbali.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
