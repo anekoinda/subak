@@ -77,8 +77,8 @@ class PemetaanFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnPolygonClic
         profilViewModel.getUser().observe(this) {
             if (it != "") {
                 dataViewModel.getSubak(it)
-                dataViewModel.subakList.observe(this) { story ->
-                    story.forEach { it ->
+                dataViewModel.subakList.observe(this) { subak ->
+                    subak.forEach { it ->
                         if (it.lat != null && it.lng != null) {
                             val coordinate = LatLng(it.lat, it.lng)
                             googleMap.addMarker(
