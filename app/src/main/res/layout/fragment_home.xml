@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_grey"
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
@@ -97,46 +98,6 @@
         </LinearLayout>
     </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/banner" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingEnd="140dp"
-                android:text="400 subak terdata pada sistem"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingEnd="150dp"
-                android:text="Ayo segera lengkapi data subak di desa Anda"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-        </LinearLayout>
-    </FrameLayout>
-
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -149,7 +110,6 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="3"
                 android:background="@drawable/custom_input"
@@ -169,7 +129,7 @@
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
-                    android:text="200"
+                    android:text="3"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -179,7 +139,7 @@
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
-                    android:text="Desa"
+                    android:text="Total Subak"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -187,7 +147,6 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="3"
                 android:background="@drawable/custom_input"
@@ -225,7 +184,6 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_weight="3"
                 android:background="@drawable/custom_input"
                 android:gravity="center"
@@ -254,7 +212,7 @@
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
-                    android:text="Subak Basah"
+                    android:text="Subak Sawah"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -290,7 +248,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -304,7 +262,118 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="64dp"
             tools:listitem="@layout/item_subak" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Request Verifikasi Data"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/reqPuraSubak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:text="Pura Subak"
+                android:textColor="@color/black_font"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageProduct"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/jmlReqPuraSubak"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/notif_circle"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:elevation="3dp"
+            card_view:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/reqSumberAir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:text="Pura Subak"
+                    android:textColor="@color/black_font"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageProduct"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/jmlReqSumberAir"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="@drawable/notif_circle"
+                        android:text="1"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </LinearLayout>

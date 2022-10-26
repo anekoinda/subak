@@ -1,14 +1,11 @@
 package com.diskominfos.subakbali.adapter
 
 import android.app.Activity
-import android.content.ClipData.Item
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.diskominfos.subakbali.api.DataSubak
 import com.diskominfos.subakbali.databinding.ItemSubakBinding
 
@@ -54,7 +51,14 @@ class SubakAdapter(private val subakList: MutableList<DataSubak>) :
         holder.bind(subakList[position])
     }
 
-    override fun getItemCount(): Int = subakList.size
+    private val limit = 3
+    override fun getItemCount(): Int {
+        return if (subakList.size > limit) {
+            limit;
+        } else {
+            subakList.size;
+        }
+    }
 
     interface OnItemClickCallback {
         fun onItemClicked(data: DataSubak)
