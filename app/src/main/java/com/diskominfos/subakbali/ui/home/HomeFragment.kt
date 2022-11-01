@@ -13,7 +13,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.diskominfos.subakbali.adapter.SubakAdapter
@@ -39,7 +38,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -59,8 +58,7 @@ class HomeFragment : Fragment() {
         val profilViewModel: ProfilViewModel by viewModels {
             val pref = requireContext().dataStore
             ViewModelFactory(
-                UserPreference.getInstance(pref),
-                requireContext()
+                UserPreference.getInstance(pref)
             )
         }
 

@@ -61,6 +61,7 @@
             card_view:cardCornerRadius="8dp">
 
             <LinearLayout
+                android:id="@+id/jenisSawah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -97,6 +98,7 @@
             card_view:cardCornerRadius="8dp">
 
             <LinearLayout
+                android:id="@+id/jenisAbian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">

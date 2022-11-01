@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.viewModels
@@ -47,8 +44,7 @@ class ProfilFragment : Fragment() {
             val profilViewModel: ProfilViewModel by viewModels {
                 val pref = requireContext().dataStore
                 ViewModelFactory(
-                    UserPreference.getInstance(pref),
-                    requireContext()
+                    UserPreference.getInstance(pref)
                 )
             }
             profilViewModel.logout()

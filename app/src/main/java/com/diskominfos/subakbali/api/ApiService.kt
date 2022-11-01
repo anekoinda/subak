@@ -13,4 +13,19 @@ interface ApiService {
     fun getAllSubak(
         @Header("Authorization") token: String
     ): Call<SubakResponse>
+
+    @GET("kabupaten/get-all")
+    fun getAllKabupaten(
+        @Header("Authorization") token: String
+    ): Call<KabupatenResponse>
+
+    @GET("kecamatan/get-all")
+    fun getAllKecamatan(
+        @Header("Authorization") token: String
+    ): Call<KecamatanResponse>
+
+    @GET("desa-dinas/get-all")
+    fun getAllDesaDinas(
+        @Header("Authorization") token: String
+    ): Call<DesaDinasResponse>
 }

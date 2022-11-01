@@ -20,6 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SubakBali">
         <activity
+            android:name=".AddDataUmum"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ListData"
             android:exported="false">
             <meta-data

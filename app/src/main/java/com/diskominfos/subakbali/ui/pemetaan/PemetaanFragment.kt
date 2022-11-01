@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -68,8 +66,7 @@ class PemetaanFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnPolygonClic
         val profilViewModel: ProfilViewModel by viewModels {
             val pref = requireContext().dataStore
             ViewModelFactory(
-                UserPreference.getInstance(pref),
-                requireContext()
+                UserPreference.getInstance(pref)
             )
         }
 

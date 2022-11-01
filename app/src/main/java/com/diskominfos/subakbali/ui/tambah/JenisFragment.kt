@@ -1,11 +1,13 @@
 package com.diskominfos.subakbali.ui.tambah
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.diskominfos.subakbali.ListData
 import com.diskominfos.subakbali.databinding.FragmentJenisBinding
 
 class JenisFragment : Fragment() {
@@ -25,6 +27,11 @@ class JenisFragment : Fragment() {
 
         _binding = FragmentJenisBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.jenisSawah.setOnClickListener{
+            val intent = Intent (activity, ListData::class.java)
+            activity?.startActivity(intent)
+        }
 
         return root
     }
