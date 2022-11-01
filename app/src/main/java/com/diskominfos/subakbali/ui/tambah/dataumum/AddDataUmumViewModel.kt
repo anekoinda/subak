@@ -1,4 +1,4 @@
-package com.diskominfos.subakbali
+package com.diskominfos.subakbali.ui.tambah.dataumum
 
 import android.content.ContentValues
 import android.util.Log

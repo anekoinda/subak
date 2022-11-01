@@ -20,14 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SubakBali">
         <activity
-            android:name=".AddDataUmum"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ListData"
+            android:name=".ui.auth.LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -39,10 +32,20 @@
             android:value="AIzaSyDeg6nPljLVx15aYfww-uBrTq9afsNjcN0" />
 
         <activity
+            android:name=".ui.tambah.dataumum.AddDataUmum"
+            android:exported="false" />
+        <activity
+            android:name=".ui.tambah.ListData"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".HomeActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.auth.LoginActivity"
+            android:name=".ui.tambah.dataumum.AddMarkerSubak"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
     android:orientation="vertical"
-    tools:context=".ListData">
+    tools:context=".ui.tambah.ListData">
 
     <FrameLayout
         android:layout_width="match_parent"

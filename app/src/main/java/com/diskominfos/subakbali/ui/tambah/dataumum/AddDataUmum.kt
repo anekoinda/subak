@@ -1,38 +1,36 @@
-package com.diskominfos.subakbali
+package com.diskominfos.subakbali.ui.tambah.dataumum
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.diskominfos.subakbali.api.ApiConfig.Companion.getApiService
+import com.diskominfos.subakbali.R
 import com.diskominfos.subakbali.api.DataDesaDinas
 import com.diskominfos.subakbali.api.DataKabupaten
 import com.diskominfos.subakbali.api.DataKecamatan
-import com.diskominfos.subakbali.api.KabupatenResponse
 import com.diskominfos.subakbali.databinding.ActivityAddDataUmumBinding
 import com.diskominfos.subakbali.model.UserPreference
 import com.diskominfos.subakbali.model.ViewModelFactory
 import com.diskominfos.subakbali.ui.auth.LoginActivity
-import com.diskominfos.subakbali.ui.data.DataViewModel
 import com.diskominfos.subakbali.ui.profil.ProfilViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener, OnMapReadyCallback {
+    private lateinit var map: GoogleMap
     private lateinit var addDataUmumViewModel: AddDataUmumViewModel
     private lateinit var profilViewModel: ProfilViewModel
     private lateinit var binding: ActivityAddDataUmumBinding
@@ -49,6 +47,11 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setupViewModelKabupaten()
         setupViewModelKecamatan()
         setupViewModelDesaDinas()
+
+        binding.btnLokasi.setOnClickListener{
+            val intent = Intent(this, AddMarkerSubak::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupJenis() {
@@ -82,7 +85,6 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         val list: MutableList<String> = ArrayList()
                         kabupaten.forEach {
                             list.add(0, it.name.toString())
-                            Log.d("data kabupaten", it.name)
                         }
                         binding.spnKabupaten.adapter = ArrayAdapter(
                             this,
@@ -90,7 +92,6 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             list
                         )
                     }
-                    Log.d("errorrrrrrrr", "setupViewModel: $kabupaten")
                 }
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))
@@ -125,7 +126,6 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             list
                         )
                     }
-                    Log.d("errorrrrrrrr", "setupViewModel: $kecamatan")
                 }
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))
@@ -153,7 +153,6 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         val list: MutableList<String> = ArrayList()
                         desa.forEach {
                             list.add(0, it.name.toString())
-                            Log.d("data desa", it.name)
                         }
                         binding.spnDesa.adapter = ArrayAdapter(
                             this,
@@ -161,7 +160,6 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             list
                         )
                     }
-                    Log.d("errorrrrrrrr", "setupViewModel: $desa")
                 }
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))
@@ -171,6 +169,17 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     private fun getListDesa(kabupaten: MutableList<DataDesaDinas>) {
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        val sydney = LatLng(-8.613729, 115.214033)
+        map.addMarker(
+            MarkerOptions()
+                .position(sydney)
+                .title("Marker in Subak Sembung")
+        )
+        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 }
 

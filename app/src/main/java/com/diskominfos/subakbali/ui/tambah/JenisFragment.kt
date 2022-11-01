@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.diskominfos.subakbali.ListData
 import com.diskominfos.subakbali.databinding.FragmentJenisBinding
 
 class JenisFragment : Fragment() {

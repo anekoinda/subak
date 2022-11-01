@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
     android:orientation="vertical"
-    tools:context=".AddDataUmum">
+    tools:context=".ui.tambah.dataumum.AddDataUmum">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -114,7 +114,8 @@
                     android:fontFamily="@font/poppins_regular"
                     android:paddingStart="12dp"
                     android:spinnerMode="dropdown"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,26 +185,21 @@
                     android:textSize="16sp" />
 
                 <FrameLayout
-                    android:id="@+id/map"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="8dp">
+                    android:id="@+id/container"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent" />
 
-                    <ImageView
-                        android:id="@+id/iv_marker"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginBottom="40dp"
-                        android:importantForAccessibility="no"
-                        android:src="@drawable/ic_lock"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </FrameLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLokasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_input"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="start|center_vertical"
+                    android:hint="Input lokasi subak"
+                    android:paddingStart="12dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"

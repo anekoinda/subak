@@ -1,10 +1,11 @@
-package com.diskominfos.subakbali
+package com.diskominfos.subakbali.ui.tambah
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.diskominfos.subakbali.databinding.ActivityAddDataUmumBinding
+import com.diskominfos.subakbali.R
 import com.diskominfos.subakbali.databinding.ActivityListDataBinding
+import com.diskominfos.subakbali.ui.tambah.dataumum.AddDataUmum
 
 class ListData : AppCompatActivity() {
     private lateinit var binding: ActivityListDataBinding
