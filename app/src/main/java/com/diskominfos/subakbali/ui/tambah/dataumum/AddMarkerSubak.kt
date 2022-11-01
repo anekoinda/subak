@@ -31,8 +31,6 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.mapSubak) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -42,6 +40,22 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latlng))
             val location = LatLng(latlng.latitude, latlng.longitude)
             mMap.addMarker(MarkerOptions().position(location))
+
+            Toast.makeText(
+                applicationContext,
+                latlng.latitude.toString() + " " + latlng.longitude,
+                Toast.LENGTH_LONG
+            ).show()
+
+            val lat = latlng.latitude.toString()
+            val long = latlng.longitude.toString()
+
+            binding.btnSimpan.setOnClickListener {
+                val intent = Intent(this, AddDataUmum::class.java)
+                intent.putExtra("lat", lat)
+                intent.putExtra("long", long)
+                startActivity(intent)
+            }
         }
     }
 
