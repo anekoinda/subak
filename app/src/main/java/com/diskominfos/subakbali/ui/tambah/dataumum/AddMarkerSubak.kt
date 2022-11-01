@@ -1,5 +1,6 @@
 package com.diskominfos.subakbali.ui.tambah.dataumum
 
+import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.mapSubak) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
 
     }
 
@@ -66,6 +68,17 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
                 address.latitude.toString() + " " + address.longitude,
                 Toast.LENGTH_LONG
             ).show()
+
+            val lat = address.latitude.toString()
+            val long = address.longitude.toString()
+
+            binding.btnSimpan.setOnClickListener {
+                val intent = Intent(this, AddDataUmum::class.java)
+                intent.putExtra("lat", lat)
+                intent.putExtra("long", long)
+                startActivity(intent)
+            }
         }
+
     }
 }

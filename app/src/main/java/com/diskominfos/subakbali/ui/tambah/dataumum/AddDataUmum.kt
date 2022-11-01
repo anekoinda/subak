@@ -34,7 +34,7 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener, OnM
     private lateinit var addDataUmumViewModel: AddDataUmumViewModel
     private lateinit var profilViewModel: ProfilViewModel
     private lateinit var binding: ActivityAddDataUmumBinding
-    val jenisSubak = arrayOf("subak", "abian")
+    private val jenisSubak = arrayOf("subak", "abian")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +52,10 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener, OnM
             val intent = Intent(this, AddMarkerSubak::class.java)
             startActivity(intent)
         }
+
+        val lat = intent.getStringExtra("lat")
+        val long = intent.getStringExtra("long")
+        binding.btnLokasi.text = "$lat, $long"
     }
 
     private fun setupJenis() {
