@@ -42,10 +42,10 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.tambah.dataumum.AddMarkerSubak"
             android:exported="true" />
         <activity
-            android:name=".ui.tambah.dataumum.AddMarkerSubak"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

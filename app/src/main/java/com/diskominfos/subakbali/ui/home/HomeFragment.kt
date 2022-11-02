@@ -82,7 +82,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun getList(subak: MutableList<DataSubak>) {
-        binding.rvSubak.layoutManager = GridLayoutManager(context, 2)
         val subakAdapter = SubakAdapter(subak)
         binding.rvSubak.adapter = subakAdapter
 //        subakAdapter.setOnClickCallBack(object : SubakAdapter.OnItemClickCallback {

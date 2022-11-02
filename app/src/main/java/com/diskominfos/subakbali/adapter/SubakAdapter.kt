@@ -51,7 +51,7 @@ class SubakAdapter(private val subakList: MutableList<DataSubak>) :
         holder.bind(subakList[position])
     }
 
-    private val limit = 3
+    private val limit = 2
     override fun getItemCount(): Int {
         return if (subakList.size > limit) {
             limit;
