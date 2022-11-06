@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
     android:orientation="vertical"
-    tools:context=".ui.tambah.datawilayah.AddWilayahDesaAdat">
+    tools:context=".ui.tambah.datawilayah.AddWilayahDesaDinas">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,12 +31,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Desa Adat"
+                    android:text="Desa Dinas"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <Spinner
-                    android:id="@+id/spnDesaAdat"
+                    android:id="@+id/spnDesaDinas"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Area Subak di Desa Adat"
+                    android:text="Area Subak di Desa Dinas"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
