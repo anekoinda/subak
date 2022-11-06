@@ -20,6 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SubakBali">
         <activity
+            android:name=".AddWilayahDesaAdat"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.tambah.datawilayah.AddDataWilayah"
             android:exported="false">
             <meta-data
