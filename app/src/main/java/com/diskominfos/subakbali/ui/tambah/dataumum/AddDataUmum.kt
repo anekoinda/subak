@@ -95,6 +95,7 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener, OnM
                             android.R.layout.simple_spinner_item,
                             list
                         )
+                        val kab: String = binding.spnKabupaten.toString()
                     }
                 }
             } else {
