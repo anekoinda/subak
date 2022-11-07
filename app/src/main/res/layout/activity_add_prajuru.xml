@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
     android:orientation="vertical"
-    tools:context=".ui.tambah.krama.AddKrama">
+    tools:context=".ui.tambah.krama.AddPrajuru">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,28 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Tempekan"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <Spinner
-                    android:id="@+id/spnTempekan"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
-                    android:spinnerMode="dropdown"
-                    android:textSize="16sp"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Krama"
+                    android:text="Nama Krama"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -73,12 +52,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Jenis Krama"
+                    android:text="Jabatan"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <Spinner
-                    android:id="@+id/spnJenisKrama"
+                    android:id="@+id/spnJabatan"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -94,23 +73,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="File Bukti Kepemilikan Lahan"
+                    android:text="Periode"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnFile"
+                <Spinner
+                    android:id="@+id/spnPeriode"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
-                    android:gravity="start|center_vertical"
-                    android:hint="Upload bukti kepemilikan lahan"
-                    android:drawableEnd="@drawable/ic_document_gray"
-                    android:paddingEnd="16dp"
                     android:paddingStart="12dp"
-                    android:textSize="16sp" />
+                    android:spinnerMode="dropdown"
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -127,16 +104,40 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/custom_input"
+                    android:drawableEnd="@drawable/ic_calendar"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="start|center_vertical"
                     android:hint="Masukkan tanggal mulai"
-                    android:drawableEnd="@drawable/ic_calendar"
-                    android:paddingEnd="16dp"
                     android:paddingStart="12dp"
+                    android:paddingEnd="16dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Tanggal Berakhir"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnTanggalAkhir"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_input"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="start|center_vertical"
+                    android:hint="Masukkan tanggal berakhir"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="16dp"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

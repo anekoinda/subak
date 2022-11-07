@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
     android:orientation="vertical"
-    tools:context=".ui.tambah.krama.AddKramaPrajuru">
+    tools:context=".ui.tambah.krama.AddPeriodePrajuru">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Data Krama"
+                    android:text="Data Prajuru"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -50,7 +50,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/custom_button"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="+ TEMPEKAN"
+                    android:text="+ PERIODE"
                     android:textColor="@color/white" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -60,7 +60,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/custom_button"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="+ KRAMA"
+                    android:text="+ PRAJURU"
                     android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
