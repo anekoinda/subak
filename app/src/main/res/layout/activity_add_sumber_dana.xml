@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_grey"
+    android:orientation="vertical"
+    tools:context=".ui.tambah.sumberdana.AddSumberDana">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Jenis Sumber Dana"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spnJenisSumberDana"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_input"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingStart="12dp"
+                    android:spinnerMode="dropdown"
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Nominal"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_input"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Masukkan nominal dana"
+                    android:inputType="textEmailAddress|textNoSuggestions"
+                    android:paddingStart="12dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Tahun"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_input"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Masukkan tahun dana diterima"
+                    android:inputType="textEmailAddress|textNoSuggestions"
+                    android:paddingStart="12dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Deskripsi"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_input"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="left"
+                    android:hint="Masukkan deskripsi sumber dana"
+                    android:inputType="text"
+                    android:paddingStart="12dp"
+                    android:paddingTop="12dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center|bottom"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_stroke"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Batal"
+            android:textColor="@color/green" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Simpan"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>
