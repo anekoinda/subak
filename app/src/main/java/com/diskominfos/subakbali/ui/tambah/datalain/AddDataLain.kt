@@ -32,9 +32,9 @@ class AddDataLain : AppCompatActivity() {
         val adapter = SectionsPagerAdapter(supportFragmentManager)
 
         // add fragment to the list
-        adapter.addFragment(AddProduk(), "Produk")
-        adapter.addFragment(AddUsaha(), "Usaha")
-        adapter.addFragment(AddAlihFungsi(), "Alih Fungsi")
+        adapter.addFragment(Produk(), "Produk")
+        adapter.addFragment(Usaha(), "Usaha")
+        adapter.addFragment(AlihFungsi(), "Alih Fungsi")
 
         // Adding the Adapter to the ViewPager
         pager.adapter = adapter

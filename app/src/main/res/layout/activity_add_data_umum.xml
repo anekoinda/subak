@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
-    android:orientation="vertical"
     tools:context=".ui.tambah.dataumum.AddDataUmum">
 
     <ScrollView
@@ -186,8 +185,8 @@
 
                 <FrameLayout
                     android:id="@+id/container"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnLokasi"

@@ -76,7 +76,7 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener, OnM
     private fun setupViewModelKabupaten() {
         profilViewModel = ViewModelProvider(
             this,
-            ViewModelFactory(UserPreference.getInstance(dataStore))
+            ViewModelFactory(UserPreference.getInstance(dataStore), this)
         )[ProfilViewModel::class.java]
 
         addDataUmumViewModel = ViewModelProvider(this)[AddDataUmumViewModel::class.java]
@@ -111,7 +111,7 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener, OnM
     private fun setupViewModelKecamatan() {
         profilViewModel = ViewModelProvider(
             this,
-            ViewModelFactory(UserPreference.getInstance(dataStore))
+            ViewModelFactory(UserPreference.getInstance(dataStore), this)
         )[ProfilViewModel::class.java]
 
         addDataUmumViewModel = ViewModelProvider(this)[AddDataUmumViewModel::class.java]
@@ -145,7 +145,7 @@ class AddDataUmum : AppCompatActivity(), AdapterView.OnItemSelectedListener, OnM
     private fun setupViewModelDesaDinas() {
         profilViewModel = ViewModelProvider(
             this,
-            ViewModelFactory(UserPreference.getInstance(dataStore))
+            ViewModelFactory(UserPreference.getInstance(dataStore), this)
         )[ProfilViewModel::class.java]
 
         addDataUmumViewModel = ViewModelProvider(this)[AddDataUmumViewModel::class.java]

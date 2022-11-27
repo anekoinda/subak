@@ -20,6 +20,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SubakBali">
         <activity
+            android:name=".ui.auth.LoginActivity"
+            android:noHistory="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.tambah.datalain.AddAlihFungsi"
             android:exported="false">
             <meta-data
@@ -43,7 +51,6 @@
         <activity
             android:name=".ui.tambah.dokumen.AddDokumen"
             android:exported="false"
-            android:label="@string/title_activity_add_data_lain"
             android:theme="@style/Theme.SubakBali.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
@@ -79,9 +86,7 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:exported="false"
-            android:label="@string/title_activity_add_dokumen"
-            android:theme="@style/Theme.SubakBali.NoActionBar">
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -178,7 +183,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.auth.LoginActivity"
+            android:name=".ui.tambah.datalain.AddDataLain"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -203,7 +208,7 @@
             android:name=".ui.tambah.dataumum.AddMarkerSubak"
             android:exported="true" />
         <activity
-            android:name=".ui.tambah.datalain.AddDataLain"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

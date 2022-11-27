@@ -64,7 +64,7 @@
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Polygon sama dengan polygon subak" />
+                    android:text="Wilayah subak berada di satu desa adat" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Polygon sama dengan polygon subak" />
+                    android:text="Wilayah subak berada di satu desa dinas" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="match_parent"
