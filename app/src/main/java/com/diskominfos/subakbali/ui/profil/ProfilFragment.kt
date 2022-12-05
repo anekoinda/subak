@@ -44,7 +44,7 @@ class ProfilFragment : Fragment() {
             val profilViewModel: ProfilViewModel by viewModels {
                 val pref = requireContext().dataStore
                 ViewModelFactory(
-                    UserPreference.getInstance(pref), requireContext()
+                    UserPreference.getInstance(pref)
                 )
             }
             profilViewModel.logout()

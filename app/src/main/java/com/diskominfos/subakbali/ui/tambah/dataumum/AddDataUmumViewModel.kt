@@ -5,12 +5,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.diskominfos.subakbali.api.*
+import com.diskominfos.subakbali.model.UserPreference
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AddDataUmumViewModel  : ViewModel() {
+class AddDataUmumViewModel(private val pref: UserPreference)  : ViewModel() {
     private val _kabupatenList = MutableLiveData<MutableList<DataKabupaten>>()
     val kabupatenList: LiveData<MutableList<DataKabupaten>> = _kabupatenList
 
@@ -19,6 +21,10 @@ class AddDataUmumViewModel  : ViewModel() {
 
     private val _desaList = MutableLiveData<MutableList<DataDesaDinas>>()
     val desaList: LiveData<MutableList<DataDesaDinas>> = _desaList
+
+    fun getUser(): LiveData<String> {
+        return pref.getUser().asLiveData()
+    }
 
     fun getKabupaten(token: String) {
         val client = ApiConfig.getApiService().getAllKabupaten("Bearer $token")

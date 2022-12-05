@@ -66,6 +66,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/namaSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -164,6 +165,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/luasSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -210,6 +212,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/batasUtaraSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -230,6 +233,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/batasTimurSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -250,6 +254,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/batasSelatanSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -270,6 +275,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/batasBaratSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -300,6 +306,7 @@
                     android:textColor="@color/green" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLanjutkan"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginStart="8dp"

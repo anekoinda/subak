@@ -1,5 +1,8 @@
 package com.diskominfos.subakbali.api
 
+import android.widget.AdapterView
+import androidx.annotation.Nullable
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -28,4 +31,24 @@ interface ApiService {
     fun getAllDesaDinas(
         @Header("Authorization") token: String
     ): Call<DesaDinasResponse>
+
+    @Multipart
+    @POST("temp_subak/create")
+    fun addDataSubak(
+        @Header("Authorization") token: String,
+        @Part("kabupaten_id") kabupaten_id: RequestBody,
+        @Part("kecamatan_id") kecamatan_id: RequestBody,
+        @Part("desa_pengampu_id") desa_pengampu_id: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("jenis_subak") jenis_subak: RequestBody,
+        @Part("luas") luas: RequestBody,
+//        @Part("lat") lat: RequestBody,
+//        @Part("lng") lng: RequestBody,
+        @Part("is_active") is_active: Int,
+        @Part("batas_utara") batas_utara: RequestBody,
+        @Part("batas_selatan") batas_selatan: RequestBody,
+        @Part("batas_timur") batas_timur: RequestBody,
+        @Part("batas_barat") batas_barat: RequestBody,
+//        @Part("polygon") polygon: RequestBody,
+    ): Call<DataSubakResponse>
 }

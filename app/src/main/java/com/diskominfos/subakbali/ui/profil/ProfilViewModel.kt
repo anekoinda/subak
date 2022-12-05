@@ -5,7 +5,7 @@ import com.diskominfos.subakbali.data.SubakRepository
 import com.diskominfos.subakbali.model.UserPreference
 import kotlinx.coroutines.launch
 
-class ProfilViewModel(private val pref: UserPreference, subakRepository: SubakRepository): ViewModel() {
+class ProfilViewModel(private val pref: UserPreference): ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = "This is profil Fragment"
     }

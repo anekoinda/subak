@@ -66,7 +66,7 @@ class PemetaanFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnPolygonClic
         val profilViewModel: ProfilViewModel by viewModels {
             val pref = requireContext().dataStore
             ViewModelFactory(
-                UserPreference.getInstance(pref), requireContext()
+                UserPreference.getInstance(pref)
             )
         }
 
