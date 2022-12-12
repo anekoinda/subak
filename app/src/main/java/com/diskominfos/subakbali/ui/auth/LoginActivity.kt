@@ -71,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "Login Success", Toast.LENGTH_SHORT).show()
                     if (user != null) {
                         loginViewModel.saveUser(user.data?.token!!)
+                        loginViewModel.saveUsername(user.data?.username!!)
                     }
                     success()
 

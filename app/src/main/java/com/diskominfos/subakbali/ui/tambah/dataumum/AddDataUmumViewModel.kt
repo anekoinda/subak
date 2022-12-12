@@ -26,6 +26,10 @@ class AddDataUmumViewModel(private val pref: UserPreference)  : ViewModel() {
         return pref.getUser().asLiveData()
     }
 
+    fun getUsername(): LiveData<String> {
+        return pref.getUsername().asLiveData()
+    }
+
     fun getKabupaten(token: String) {
         val client = ApiConfig.getApiService().getAllKabupaten("Bearer $token")
         Log.e("token", token)
@@ -49,8 +53,8 @@ class AddDataUmumViewModel(private val pref: UserPreference)  : ViewModel() {
         })
     }
 
-    fun getKecamatan(token: String) {
-        val client = ApiConfig.getApiService().getAllKecamatan("Bearer $token")
+    fun getKecamatan(token: String, district_id : String) {
+        val client = ApiConfig.getApiService().getKecamatanByKabupaten("Bearer $token", "$district_id")
         Log.e("token", token)
         client.enqueue(object : Callback<KecamatanResponse> {
             override fun onResponse(call: Call<KecamatanResponse>, response: Response<KecamatanResponse>) {
@@ -72,8 +76,8 @@ class AddDataUmumViewModel(private val pref: UserPreference)  : ViewModel() {
         })
     }
 
-    fun getDesDinas(token: String) {
-        val client = ApiConfig.getApiService().getAllDesaDinas("Bearer $token")
+    fun getDesDinas(token: String, id : String) {
+        val client = ApiConfig.getApiService().getDesaByKecamatan("Bearer $token", "$id")
         Log.e("token", token)
         client.enqueue(object : Callback<DesaDinasResponse> {
             override fun onResponse(call: Call<DesaDinasResponse>, response: Response<DesaDinasResponse>) {

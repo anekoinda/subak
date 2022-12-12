@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.util.prefs.Preferences
 
 class UserPreference private constructor(private val dataStore: DataStore<androidx.datastore.preferences.core.Preferences>) {
     fun getUser(): Flow<String> {
@@ -16,11 +15,24 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         }
     }
 
+    fun getUsername(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[USERNAME] ?: ""
+        }
+    }
+
     suspend fun saveUser(user: String) {
         dataStore.edit { preferences ->
             val token = user.split("|")
             preferences[TOKEN] = token[1]
             Log.e("cek token", preferences[TOKEN].toString())
+        }
+    }
+
+    suspend fun saveUsername(user: String) {
+        dataStore.edit { preferences ->
+            preferences[USERNAME] = user
+            Log.e("cek username", preferences[USERNAME].toString())
         }
     }
 
@@ -43,6 +55,7 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         private var INSTANCE: UserPreference? = null
         private val STATE_KEY = booleanPreferencesKey("state")
         private val TOKEN = stringPreferencesKey("token")
+        private val USERNAME = stringPreferencesKey("username")
 
         fun getInstance(dataStore: DataStore<androidx.datastore.preferences.core.Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {

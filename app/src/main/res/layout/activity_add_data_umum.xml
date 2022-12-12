@@ -86,15 +86,28 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/spnJenis"
+                <TextView
+                    android:id="@+id/textSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:paddingStart="8dp"
+                    android:text="Pilih Jenis Subak"
+                    android:background="@drawable/custom_input"
                     android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/editTextSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -105,17 +118,18 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/spnKabupaten"
+                <TextView
+                    android:id="@+id/textKabupaten"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
-                    android:spinnerMode="dropdown"
-                    android:textSize="16sp"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:paddingStart="8dp"
+                    android:text="Pilih Kabupaten"
+                    android:background="@drawable/custom_input"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -126,14 +140,17 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/spnKecamatan"
+                <TextView
+                    android:id="@+id/textKecamatan"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:paddingStart="8dp"
+                    android:text="Pilih Kecamatan"
+                    android:background="@drawable/custom_input"
                     android:textSize="16sp" />
 
                 <TextView
@@ -145,14 +162,17 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/spnDesa"
+                <TextView
+                    android:id="@+id/textDesa"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:paddingStart="8dp"
+                    android:text="Pilih Desa Pengampu"
+                    android:background="@drawable/custom_input"
                     android:textSize="16sp" />
 
                 <TextView
@@ -160,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Luas Subak"
+                    android:text="Luas Subak (Hektare)"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -172,7 +192,7 @@
                     android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Masukkan luas subak"
-                    android:inputType="textEmailAddress|textNoSuggestions"
+                    android:inputType="number"
                     android:paddingStart="12dp"
                     android:textSize="16sp" />
 

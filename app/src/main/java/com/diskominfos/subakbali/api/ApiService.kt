@@ -22,14 +22,16 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Call<KabupatenResponse>
 
-    @GET("kecamatan/get-all")
-    fun getAllKecamatan(
-        @Header("Authorization") token: String
+    @GET("kecamatan/get-by-kabupaten/{district_id}")
+    fun getKecamatanByKabupaten(
+        @Header("Authorization") token: String,
+        @Path("district_id") district_id: String
     ): Call<KecamatanResponse>
 
-    @GET("desa-dinas/get-all")
-    fun getAllDesaDinas(
-        @Header("Authorization") token: String
+    @GET("desa-dinas/get-by-kecamatan/{id}")
+    fun getDesaByKecamatan(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
     ): Call<DesaDinasResponse>
 
     @Multipart
@@ -42,13 +44,15 @@ interface ApiService {
         @Part("nama") nama: RequestBody,
         @Part("jenis_subak") jenis_subak: RequestBody,
         @Part("luas") luas: RequestBody,
-//        @Part("lat") lat: RequestBody,
-//        @Part("lng") lng: RequestBody,
+        @Part("lat") lat: RequestBody,
+        @Part("lng") lng: RequestBody,
         @Part("is_active") is_active: Int,
         @Part("batas_utara") batas_utara: RequestBody,
         @Part("batas_selatan") batas_selatan: RequestBody,
         @Part("batas_timur") batas_timur: RequestBody,
         @Part("batas_barat") batas_barat: RequestBody,
+        @Part("action_status") action_status: RequestBody,
+        @Part("created_by") created_by: RequestBody
 //        @Part("polygon") polygon: RequestBody,
     ): Call<DataSubakResponse>
 }

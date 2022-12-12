@@ -17,4 +17,10 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel(){
             pref.saveUser(user)
         }
     }
+
+    fun saveUsername(user: String) {
+        viewModelScope.launch {
+            pref.saveUsername(user)
+        }
+    }
 }

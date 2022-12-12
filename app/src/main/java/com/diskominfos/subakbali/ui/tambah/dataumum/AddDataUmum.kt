@@ -1,13 +1,14 @@
 package com.diskominfos.subakbali.ui.tambah.dataumum
 
+
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -28,22 +29,39 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.leo.searchablespinner.SearchableSpinner
+import com.leo.searchablespinner.interfaces.OnItemSelectListener
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemSelectedListener {
+class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private lateinit var addDataUmumViewModel: AddDataUmumViewModel
     private lateinit var binding: ActivityAddDataUmumBinding
-    private val jenisSubak = arrayOf("Pilih jenis subak", "subak", "abian")
+    private val jenisSubak = arrayListOf("Subak", "Abian")
     var idKabupatenSelected: String? = ""
     var idKecamatanSelected: String? = ""
     var idDesaSelected: String? = ""
+    var jenisSubakSelected: String? = ""
+    var latitude: String? = ""
+    var longitude: String? = ""
+    var activityStatus: String = "add"
+    var isTextInputLayoutClicked: Boolean = false
+
+    private val resultCOntract =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
+            if (result?.resultCode == Activity.RESULT_OK) {
+                latitude = result.data?.getStringExtra(AddMarkerSubak.EXTRA_LAT)
+                longitude = result.data?.getStringExtra(AddMarkerSubak.EXTRA_LNG)
+                binding.btnLokasi.text = "$latitude, $longitude"
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,22 +69,14 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
         binding = ActivityAddDataUmumBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupJenis()
-        setupViewModelKabupaten()
-        setupViewModelKecamatan()
-        setupViewModelDesaDinas()
+        setJenisSubak()
+        setKabupaten()
 
         binding.btnLokasi.setOnClickListener {
             val intent = Intent(this, AddMarkerSubak::class.java)
-            startActivity(intent)
+            resultCOntract.launch(intent)
         }
-
         binding.btnLanjutkan.setOnClickListener { addDataSubak() }
-
-        val lat = intent.getStringExtra("lat")
-        val long = intent.getStringExtra("long")
-        binding.btnLokasi.text = "$lat, $long"
-
     }
 
     private fun addDataSubak() {
@@ -76,7 +86,10 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
         )[AddDataUmumViewModel::class.java]
 
         addDataUmumViewModel = ViewModelProvider(this)[AddDataUmumViewModel::class.java]
-
+        var getUsername: String = ""
+        addDataUmumViewModel.getUsername().observe(this) { it ->
+            getUsername = it
+        }
         addDataUmumViewModel.getUser().observe(this) { it ->
             Log.e("token", it)
             val getName = binding.namaSubak.text.toString()
@@ -97,8 +110,14 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
             val kecamatan_id = getKecamatanId.toRequestBody("text/plain".toMediaType())
             val getDesaId = idDesaSelected.toString()
             val desa_id = getDesaId.toRequestBody("text/plain".toMediaType())
-            val getJenisSubak = binding.spnJenis.selectedItem.toString()
+            val getJenisSubak = jenisSubakSelected.toString()
             val jenis = getJenisSubak.toRequestBody("text/plain".toMediaType())
+            val getLongitude = longitude.toString()
+            val lng = getLongitude.toRequestBody("text/plain".toMediaType())
+            val getLatitude = latitude.toString()
+            val lat = getLatitude.toRequestBody("text/plain".toMediaType())
+            val activity_status = activityStatus.toRequestBody("text/plain".toMediaType())
+            val created_by = getUsername.toRequestBody("text/plain".toMediaType())
 
             val service = getApiService().addDataSubak(
                 "Bearer $it",
@@ -108,11 +127,15 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
                 name,
                 jenis,
                 luas,
-                0,
+                lat,
+                lng,
+                1,
                 batas_utara,
                 batas_selatan,
                 batas_timur,
-                batas_barat
+                batas_barat,
+                activity_status,
+                created_by
             )
 
             service.enqueue(object : Callback<DataSubakResponse> {
@@ -123,7 +146,11 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
                 ) {
                     Log.e("token", it)
                     if (response.isSuccessful) {
-                        Toast.makeText(this@AddDataUmum, "berhasil", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@AddDataUmum,
+                            "Berhasil input data subak",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         val responseBody = response.body()
                         if (responseBody != null && !responseBody.error) {
                             Toast.makeText(
@@ -153,40 +180,43 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
         }
     }
 
-    private fun setupJenis() {
-        binding.spnJenis.onItemSelectedListener = this
-        val adapterJenis = ArrayAdapter(this, android.R.layout.simple_spinner_item, jenisSubak)
-        adapterJenis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spnJenis.adapter = adapterJenis
-
-        binding.spnJenis.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    val text: String = parent?.getItemAtPosition(position).toString()
-                    Toast.makeText(
-                        this@AddDataUmum,
-                        text,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+    private fun setJenisSubak() {
+        val searchableSpinner = SearchableSpinner(this)
+        searchableSpinner.windowTitle = "Pilih Jenis Subak"
+        searchableSpinner.searchViewVisibility = SearchableSpinner.SpinnerView.GONE
+        searchableSpinner.onItemSelectListener = object : OnItemSelectListener {
+            override fun setOnItemSelectListener(
+                position: Int,
+                selectedString: String
+            ) {
+                if (isTextInputLayoutClicked)
+                    jenisSubakSelected = selectedString
+                    binding.textSubak.text = jenisSubakSelected
             }
+        }
+
+        searchableSpinner.setSpinnerListItems(jenisSubak)
+        binding.textSubak.keyListener = null
+        binding.textSubak.setOnClickListener {
+            isTextInputLayoutClicked = true
+            searchableSpinner.show()
+        }
+
+        binding.editTextSpinner.keyListener = null
+        binding.editTextSpinner.setOnClickListener {
+            searchableSpinner.highlightSelectedItem = false
+            isTextInputLayoutClicked = false
+            searchableSpinner.show()
+        }
     }
 
-    fun setupViewModelKabupaten() {
+    fun setKabupaten() {
         addDataUmumViewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[AddDataUmumViewModel::class.java]
         val idKabupaten: MutableList<String> = ArrayList()
-        binding.spnKabupaten.onItemSelectedListener = this
+
         addDataUmumViewModel = ViewModelProvider(this)[AddDataUmumViewModel::class.java]
         addDataUmumViewModel.getUser().observe(this) { it ->
             if (it != "") {
@@ -196,20 +226,47 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
                     if (it != null) {
                         val list: MutableList<String> = ArrayList()
 
-                        list.add(0, "Pilih kabupaten")
-                        idKabupaten.add(0, "0")
-
                         kabupaten.forEach {
-                            idKabupaten.add(1, it.id)
-                            list.add(1, it.name)
+                            idKabupaten.add(it.id)
+                            list.add(it.name)
                         }
 
-                        binding.spnKabupaten.adapter = ArrayAdapter(
-                            this,
-                            android.R.layout.simple_spinner_item,
-                            list
-                        )
+                        val searchableSpinner = SearchableSpinner(this)
+                        searchableSpinner.windowTitle = "Pilih Kabupaten"
+                        searchableSpinner.onItemSelectListener = object : OnItemSelectListener {
+                            override fun setOnItemSelectListener(
+                                position: Int,
+                                selectedString: String
+                            ) {
+                                Toast.makeText(
+                                    this@AddDataUmum,
+                                    "${searchableSpinner.selectedItem}  ${searchableSpinner.selectedItemPosition}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                if (idKabupaten.count() >= 0 && position >= 0) {
+                                    setKecamatan(idKabupaten[position])
+                                }
+                                idKabupatenSelected = idKabupaten[position]
+                                if (isTextInputLayoutClicked)
+                                    binding.textKabupaten.text = selectedString
+                                else
+                                    binding.editTextSpinner.setText(selectedString)
+                            }
+                        }
 
+                        searchableSpinner.setSpinnerListItems(list as ArrayList<String>)
+                        binding.textKabupaten.keyListener = null
+                        binding.textKabupaten.setOnClickListener {
+                            isTextInputLayoutClicked = true
+                            searchableSpinner.show()
+                        }
+
+                        binding.editTextSpinner.keyListener = null
+                        binding.editTextSpinner.setOnClickListener {
+                            searchableSpinner.highlightSelectedItem = false
+                            isTextInputLayoutClicked = false
+                            searchableSpinner.show()
+                        }
                     }
                 }
             } else {
@@ -217,26 +274,12 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
                 finish()
             }
         }
-        binding.spnKabupaten.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    idKabupatenSelected = idKabupaten[position]
-                }
-            }
     }
 
     private fun getListKabupaten(kabupaten: MutableList<DataKabupaten>) {
     }
 
-    private fun setupViewModelKecamatan() {
+    private fun setKecamatan(district_id: String) {
         addDataUmumViewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
@@ -245,39 +288,49 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
         addDataUmumViewModel = ViewModelProvider(this)[AddDataUmumViewModel::class.java]
         addDataUmumViewModel.getUser().observe(this) { it ->
             if (it != "") {
-                addDataUmumViewModel.getKecamatan(it)
+                addDataUmumViewModel.getKecamatan(it, district_id)
                 addDataUmumViewModel.kecamataList.observe(this) { kecamatan ->
                     getListKecamatan(kecamatan)
                     if (it != null) {
                         val list: MutableList<String> = ArrayList()
                         val idKecamatan: MutableList<String> = ArrayList()
-                        list.add(0, "Pilih kecamatan")
-                        idKecamatan.add(0, "0")
 
                         kecamatan.forEach {
-                            idKecamatan.add(1, it.id)
-                            list.add(1, it.name)
+                            idKecamatan.add(it.id)
+                            list.add(it.name)
                         }
 
-                        binding.spnKecamatan.adapter = ArrayAdapter(
-                            this,
-                            android.R.layout.simple_spinner_item,
-                            list
-                        )
-                        binding.spnKecamatan.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onNothingSelected(parent: AdapterView<*>?) {
+                        val searchableSpinner = SearchableSpinner(this)
+                        searchableSpinner.windowTitle = "Pilih Kecamatan"
+                        searchableSpinner.onItemSelectListener = object : OnItemSelectListener {
+                            override fun setOnItemSelectListener(
+                                position: Int,
+                                selectedString: String
+                            ) {
+                                if (idKecamatan.count() >= 0 && position >= 0) {
+                                    setDesa(idKecamatan[position])
                                 }
-
-                                override fun onItemSelected(
-                                    parent: AdapterView<*>?,
-                                    view: View?,
-                                    position: Int,
-                                    id: Long
-                                ) {
-                                    idKecamatanSelected = idKecamatan[position]
-                                }
+                                idKecamatanSelected = idKecamatan[position]
+                                if (isTextInputLayoutClicked)
+                                    binding.textKecamatan.text = selectedString
+                                else
+                                    binding.editTextSpinner.setText(selectedString)
                             }
+                        }
+
+                        searchableSpinner.setSpinnerListItems(list as ArrayList<String>)
+                        binding.textKecamatan.keyListener = null
+                        binding.textKecamatan.setOnClickListener {
+                            isTextInputLayoutClicked = true
+                            searchableSpinner.show()
+                        }
+
+                        binding.editTextSpinner.keyListener = null
+                        binding.editTextSpinner.setOnClickListener {
+                            searchableSpinner.highlightSelectedItem = false
+                            isTextInputLayoutClicked = false
+                            searchableSpinner.show()
+                        }
                     }
                 }
             } else {
@@ -290,7 +343,7 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
     private fun getListKecamatan(kecamatan: MutableList<DataKecamatan>) {
     }
 
-    private fun setupViewModelDesaDinas() {
+    private fun setDesa(id: String) {
         addDataUmumViewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
@@ -299,39 +352,46 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
         addDataUmumViewModel = ViewModelProvider(this)[AddDataUmumViewModel::class.java]
         addDataUmumViewModel.getUser().observe(this) { it ->
             if (it != "") {
-                addDataUmumViewModel.getDesDinas(it)
+                addDataUmumViewModel.getDesDinas(it, id)
                 addDataUmumViewModel.desaList.observe(this) { desa ->
                     getListDesa(desa)
                     if (it != null) {
                         val list: MutableList<String> = ArrayList()
                         val idDesa: MutableList<String> = ArrayList()
-                        list.add(0, "Pilih desa pengampu")
-                        idDesa.add(0, "0")
 
                         desa.forEach {
-                            list.add(1, it.name)
-                            idDesa.add(1, it.id)
+                            list.add(it.name)
+                            idDesa.add(it.id)
                         }
 
-                        binding.spnDesa.adapter = ArrayAdapter(
-                            this,
-                            android.R.layout.simple_spinner_item,
-                            list
-                        )
-                        binding.spnDesa.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onNothingSelected(parent: AdapterView<*>?) {
-                                }
-
-                                override fun onItemSelected(
-                                    parent: AdapterView<*>?,
-                                    view: View?,
-                                    position: Int,
-                                    id: Long
-                                ) {
-                                    idDesaSelected = idDesa[position]
-                                }
+                        val searchableSpinner = SearchableSpinner(this)
+                        searchableSpinner.windowTitle = "Pilih Kecamatan"
+                        searchableSpinner.onItemSelectListener = object : OnItemSelectListener {
+                            override fun setOnItemSelectListener(
+                                position: Int,
+                                selectedString: String
+                            ) {
+                                idDesaSelected = idDesa[position]
+                                if (isTextInputLayoutClicked)
+                                    binding.textDesa.text = selectedString
+                                else
+                                    binding.editTextSpinner.setText(selectedString)
                             }
+                        }
+
+                        searchableSpinner.setSpinnerListItems(list as ArrayList<String>)
+                        binding.textDesa.keyListener = null
+                        binding.textDesa.setOnClickListener {
+                            isTextInputLayoutClicked = true
+                            searchableSpinner.show()
+                        }
+
+                        binding.editTextSpinner.keyListener = null
+                        binding.editTextSpinner.setOnClickListener {
+                            searchableSpinner.highlightSelectedItem = false
+                            isTextInputLayoutClicked = false
+                            searchableSpinner.show()
+                        }
                     }
                 }
             } else {
@@ -353,14 +413,5 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback, AdapterView.OnItemS
                 .title("Marker in Subak Sembung")
         )
         map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-    }
-
-
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
     }
 }
