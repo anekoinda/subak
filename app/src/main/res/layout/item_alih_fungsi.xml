@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"
         android:clipChildren="false"
@@ -39,7 +39,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/namaProduk"
+                        android:id="@+id/namaAlihFungsi"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -48,18 +48,6 @@
                         android:text="nama produk"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/jenisProduk"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="2dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="jenis produk"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="12sp" />
-
                 </LinearLayout>
 
             </LinearLayout>

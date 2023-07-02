@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Luas"
+                    android:text="Luas (Dalam Hektare)"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -87,7 +87,7 @@
                     android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Masukkan luas alih fungsi"
-                    android:inputType="textEmailAddress|textNoSuggestions"
+                    android:inputType="number"
                     android:paddingStart="12dp"
                     android:textSize="16sp" />
 
@@ -139,7 +139,8 @@
             android:background="@drawable/custom_button_stroke"
             android:fontFamily="@font/poppins_medium"
             android:text="Batal"
-            android:textColor="@color/green" />
+            android:textAllCaps="false"
+            android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLanjutkan"
@@ -150,6 +151,7 @@
             android:background="@drawable/custom_button"
             android:fontFamily="@font/poppins_medium"
             android:text="Simpan"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
     android:orientation="vertical"
-    tools:context=".ui.tambah.datalain.Usaha">
+    tools:context=".ui.tambah.dokumen.SuratKeterangan">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,24 +31,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Usaha"
+                    android:text="Surat Keterangan"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/btnAddUsaha"
+                    android:id="@+id/btnAddSuratKeterangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="right"
-                    android:text="+ Tambah Usaha"
+                    android:text="+ Tambah Surat"
                     android:textColor="@color/green"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/emptyObjectUsaha"
+                android:id="@+id/emptyObjectSuratKeterangan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -74,13 +75,13 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_usaha"
+                android:id="@+id/rv_sk"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:divider="@null"
                 android:dividerHeight="0dp"
-                tools:listitem="@layout/item_usaha" />
+                tools:listitem="@layout/item_surat_keterangan" />
         </LinearLayout>
     </ScrollView>
 

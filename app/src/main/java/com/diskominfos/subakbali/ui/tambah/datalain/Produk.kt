@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -15,9 +14,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.diskominfos.subakbali.DetailProduk
 import com.diskominfos.subakbali.adapter.ProdukAdapter
-import com.diskominfos.subakbali.adapter.SumberDanaAdapter
 import com.diskominfos.subakbali.api.*
 import com.diskominfos.subakbali.databinding.ActivityProdukBinding
 import com.diskominfos.subakbali.model.UserPreference
@@ -49,16 +46,31 @@ class Produk : AppCompatActivity() {
         setupViewModel()
 
         getIdSubak = intent.getStringExtra("idsubak") // Retrieve the string value from the Intent
+
+        val bundle: Bundle? = intent.extras
         Log.e("id sumber airrr", "$getIdSubak")
+
         if (getIdSubak != null) {
             val idtempsubak = getIdSubak
             binding.btnAddProduk.setOnClickListener {
-                val builder = AlertDialog.Builder(this)
-                Log.e("id subak", "$getIdSubak")
+                Log.e("id subak produk", "$getIdSubak")
                 val intent = Intent(this, AddProduk::class.java).apply {
                     putExtra("idsubak", idtempsubak)
                 }
                 startActivity(intent)
+            }
+        }
+
+        if (bundle != null) {
+            Log.e("id subak produk", "$getIdSubak")
+            val idtempsubak = getIdSubak
+            binding.btnLanjutkan.setOnClickListener {
+                Log.e("data id", "$getIdSubak")
+                val intent = Intent(this, Usaha::class.java).apply{
+                    putExtra("idsubak", idtempsubak)
+                }
+                startActivity(intent)
+                finish()
             }
         }
     }
@@ -80,6 +92,7 @@ class Produk : AppCompatActivity() {
                 getListProduk(it)
                 produkList.observe(this) { produk ->
                     getList(produk)
+                    Log.d("error", "list produk: $produk")
                     if (produk != null && produk.isNotEmpty()) {
                         binding.emptyObjectProduk.visibility = View.GONE
                     } else {
@@ -96,7 +109,6 @@ class Produk : AppCompatActivity() {
 
     private fun getListProduk(token: String) {
         val client = ApiConfig.getApiService().getListProduk("Bearer $token", "$getIdSubak")
-//        val client = ApiConfig.getApiService().getListTempSubakDesaAdat("Bearer $token")
         Log.e("data id temp pura subak", "$getIdSubak")
         client.enqueue(object : Callback<GetProdukResponse> {
             override fun onResponse(call: Call<GetProdukResponse>, response: Response<GetProdukResponse>) {

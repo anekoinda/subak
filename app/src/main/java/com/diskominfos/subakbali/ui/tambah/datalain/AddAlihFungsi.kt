@@ -41,46 +41,15 @@ class AddAlihFungsi : AppCompatActivity() {
         setDatePicker()
 
         getIdSubak = intent.getStringExtra("idsubak")
-        Log.e("id add produk", "$getIdSubak")
+        Log.e("id add alih fungsi", "$getIdSubak")
         if (getIdSubak != null) {
             val idtempsubak = getIdSubak
             binding.btnLanjutkan.setOnClickListener {
-                val builder = AlertDialog.Builder(this)
                 addAlihFungsi("$getIdSubak")
-                Log.e("id subak", "$getIdSubak")
-                val intent = Intent(this, AddAlihFungsi::class.java).apply {
+                val intent = Intent(this, AlihFungsi::class.java).apply {
                     putExtra("idsubak", idtempsubak)
-                }
-//                setupRecyclerSumberAir()
-//                setupViewModel()
-            }
-        }
-
-        val bundle: Bundle? = intent.extras
-        if (bundle != null) {
-            Log.e("idsubakparahyangan", "$getIdSubak")
-
-            binding.btnLanjutkan.setOnClickListener {
-                val builder = AlertDialog.Builder(this)
-                addAlihFungsi("$getIdSubak")
-                Log.e("data id", "$getIdSubak")
-//                setupRecyclerPuraSubak()
-//                setupViewModel()
-            }
-        }
-        if (bundle != null) {
-            Log.e("id sumber air", "$getIdSubak")
-            val idtempsubak = getIdSubak
-            binding.btnLanjutkan.setOnClickListener {
-                val builder = AlertDialog.Builder(this)
-                Log.e("data id", "$getIdSubak")
-                addAlihFungsi("$getIdSubak")
-                val intent = Intent(this, AddAlihFungsi::class.java).apply{
-                    putExtra("idsubak", idtempsubak)
-                    Log.e("id sumber air", "$idtempsubak")
                 }
                 startActivity(intent)
-                finish()
             }
         }
     }

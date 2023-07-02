@@ -163,8 +163,9 @@
             android:layout_weight="1"
             android:background="@drawable/custom_button_stroke"
             android:fontFamily="@font/poppins_medium"
+            android:textAllCaps="false"
             android:text="Batal"
-            android:textColor="@color/green" />
+            android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLanjutkan"
@@ -175,6 +176,7 @@
             android:background="@drawable/custom_button"
             android:fontFamily="@font/poppins_medium"
             android:text="Simpan"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

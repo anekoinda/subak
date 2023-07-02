@@ -11,6 +11,9 @@ import com.diskominfos.subakbali.ui.tambah.datalain.AddUsaha
 import com.diskominfos.subakbali.ui.tambah.dataumum.AddDataUmum
 import com.diskominfos.subakbali.ui.tambah.datawilayah.AddDataWilayah
 import com.diskominfos.subakbali.ui.tambah.dokumen.AddDokumen
+import com.diskominfos.subakbali.ui.tambah.dokumen.Awig
+import com.diskominfos.subakbali.ui.tambah.dokumen.Perarem
+import com.diskominfos.subakbali.ui.tambah.dokumen.SuratKeterangan
 import com.diskominfos.subakbali.ui.tambah.krama.AddKrama
 import com.diskominfos.subakbali.ui.tambah.parahyangan.AddDataParahyangan
 import com.diskominfos.subakbali.ui.tambah.parahyangan.Tradisi
@@ -53,8 +56,18 @@ class ListData : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.dataDokumen.setOnClickListener {
-            val intent = Intent(this, AddDokumen::class.java)
+        binding.dataSuratKeterangan.setOnClickListener {
+            val intent = Intent(this, SuratKeterangan::class.java)
+            startActivity(intent)
+        }
+
+        binding.dataAwig.setOnClickListener {
+            val intent = Intent(this, Awig::class.java)
+            startActivity(intent)
+        }
+
+        binding.dataPerarem.setOnClickListener {
+            val intent = Intent(this, Perarem::class.java)
             startActivity(intent)
         }
 

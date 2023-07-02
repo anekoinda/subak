@@ -7,9 +7,9 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-class GetProdukResponse(
+class GetUsahaResponse(
     @field:SerializedName("data")
-    val data: MutableList<GetAllProduk>,
+    val data: MutableList<GetAllUsaha>,
 
     @field:SerializedName("error")
     val error: Boolean,
@@ -18,9 +18,9 @@ class GetProdukResponse(
     val message: String,
 )
 
-@Entity(tableName = "produk")
+@Entity(tableName = "usaha")
 @Parcelize
-data class GetAllProduk(
+data class GetAllUsaha(
     @SerializedName("id")
     @Expose
     var id: String? = null,
@@ -28,18 +28,37 @@ data class GetAllProduk(
     @field:SerializedName("subak_id")
     val subak_id: Int,
 
-    @field:SerializedName("jenis_produk_id")
-    val jenis_produk_id: String,
+    @field:SerializedName("jenis_usaha_id")
+    val jenis_usaha_id: String,
 
-    @field:SerializedName("jenis_produk")
-    val jenis_produk: GetJenisProduk,
+    @field:SerializedName("jenis_usaha")
+    val jenis_usaha: GetJenisUsaha,
+
+    @field:SerializedName("jenis_pengelola_usaha_id")
+    val jenis_pengelola_usaha_id: String,
+
+    @field:SerializedName("jenis_pengelola_usaha")
+    val jenis_pengelola_usaha: GetJenisPengelolaUsaha,
 
     @field:SerializedName("nama")
     val nama: String,
+
+    @field:SerializedName("keterangan")
+    val keterangan: String,
 ) : Parcelable
 
 @Parcelize
-data class GetJenisProduk(
+data class GetJenisUsaha(
+    @PrimaryKey
+    @field:SerializedName("id")
+    val id: String,
+
+    @field:SerializedName("nama")
+    val nama: String
+) : Parcelable
+
+@Parcelize
+data class GetJenisPengelolaUsaha(
     @PrimaryKey
     @field:SerializedName("id")
     val id: String,

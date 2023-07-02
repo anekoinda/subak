@@ -394,6 +394,7 @@ interface ApiService {
     fun addDataProduk(
         @Header("Authorization") token: String,
         @Part("subak_id") subak_id: Int,
+        @Part("is_active") is_active: Int,
         @Part("jenis_produk_id") jenis_produk_id: RequestBody,
         @Part("nama") nama: RequestBody,
     ): Call<ProdukResponse>
@@ -425,6 +426,12 @@ interface ApiService {
         @Part("keterangan") keterangan: RequestBody,
     ): Call<UsahaResponse>
 
+    @GET("usaha/get-data/{subak_id}")
+    fun getListUsaha(
+        @Header("Authorization") token: String,
+        @Path("subak_id") subak_id: String,
+    ): Call<GetUsahaResponse>
+
     @Multipart
     @POST("alih_fungsi/create")
     fun addAlihFungsi(
@@ -435,4 +442,11 @@ interface ApiService {
         @Part("nama_alih_lahan") nama_alih_lahan: RequestBody,
         @Part("deskripsi") deskripsi: RequestBody,
     ): Call<AlihFungsiResponse>
+
+    @GET("alih_fungsi/get-data/{subak_id}")
+    fun getListAlihFungsi(
+        @Header("Authorization") token: String,
+        @Path("subak_id") subak_id: String,
+    ): Call<GetAlihFungsiResponse>
+
 }

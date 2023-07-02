@@ -49,40 +49,11 @@ class AddUsaha : AppCompatActivity() {
         if (getIdSubak != null) {
             val idtempsubak = getIdSubak
             binding.btnLanjutkan.setOnClickListener {
-                val builder = AlertDialog.Builder(this)
                 addUsaha("$getIdSubak")
-                Log.e("id subak", "$getIdSubak")
                 val intent = Intent(this, Usaha::class.java).apply {
                     putExtra("idsubak", idtempsubak)
                 }
-            }
-        }
-
-        val bundle: Bundle? = intent.extras
-        if (bundle != null) {
-            Log.e("idsubakparahyangan", "$getIdSubak")
-
-            binding.btnLanjutkan.setOnClickListener {
-                val builder = AlertDialog.Builder(this)
-                addUsaha("$getIdSubak")
-                Log.e("data id", "$getIdSubak")
-//                setupRecyclerPuraSubak()
-//                setupViewModel()
-            }
-        }
-        if (bundle != null) {
-            Log.e("id sumber air", "$getIdSubak")
-            val idtempsubak = getIdSubak
-            binding.btnLanjutkan.setOnClickListener {
-                val builder = AlertDialog.Builder(this)
-                Log.e("data id", "$getIdSubak")
-                addUsaha("$getIdSubak")
-                val intent = Intent(this, AlihFungsi::class.java).apply{
-                    putExtra("idsubak", idtempsubak)
-                    Log.e("id sumber air", "$idtempsubak")
-                }
                 startActivity(intent)
-                finish()
             }
         }
     }
@@ -145,10 +116,6 @@ class AddUsaha : AppCompatActivity() {
                     }
                 }
             }
-//            } else {
-//                startActivity(Intent(this, LoginActivity::class.java))
-//                finish()
-//            }
         }
     }
 
@@ -213,10 +180,6 @@ class AddUsaha : AppCompatActivity() {
                     }
                 }
             }
-//            } else {
-//                startActivity(Intent(this, LoginActivity::class.java))
-//                finish()
-//            }
         }
     }
 

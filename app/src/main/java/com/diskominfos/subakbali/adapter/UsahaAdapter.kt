@@ -9,27 +9,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.diskominfos.subakbali.R
 import com.diskominfos.subakbali.api.*
 
-class ProdukAdapter(
-    private var results: MutableList<GetAllProduk>,
-    val listener: OnAdapterProdukListener,
+class UsahaAdapter(
+    private var results: MutableList<GetAllUsaha>,
+    val listener: OnAdapterUsahaListener,
     val token: String
 ) :
-    RecyclerView.Adapter<ProdukAdapter.ViewHolder>() {
+    RecyclerView.Adapter<UsahaAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val inflatedView = layoutInflater.inflate(R.layout.item_produk, parent, false)
+        val inflatedView = layoutInflater.inflate(R.layout.item_usaha, parent, false)
         return ViewHolder(inflatedView)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private var nama: TextView = view.findViewById(R.id.namaProduk)
-        private var jenis: TextView = view.findViewById(R.id.jenisProduk)
+        private var nama: TextView = view.findViewById(R.id.namaUsaha)
+        private var jenis: TextView = view.findViewById(R.id.jenisUsaha)
 
-        fun bindItem(data: GetAllProduk) {
+        fun bindItem(data: GetAllUsaha) {
             nama.text = data.nama
-            jenis.text = data.jenis_produk.nama
-            Log.e("jenis produk", data.jenis_produk.nama)
+            jenis.text = data.jenis_usaha.nama
+            Log.e("jenis usaha", data.jenis_usaha.nama)
         }
     }
 
@@ -39,13 +39,6 @@ class ProdukAdapter(
         holder.itemView.setOnClickListener {
             listener.onClick(result)
         }
-//        fun getUser(): LiveData<String> {
-//            +999999999999999999996/kjm-* io55 pref.getUser().asLiveData()
-//        }
-//        holder.deleteButton.setOnClickListener {
-////            getUser().observe(context.applicationContext){
-//            onDelete(result, result.id.toString(), token)
-
     }
 
     override fun getItemCount(): Int = results.size
@@ -53,8 +46,8 @@ class ProdukAdapter(
 
     }
 
-    interface OnAdapterProdukListener {
-        fun onClick(result: GetAllProduk)
+    interface OnAdapterUsahaListener {
+        fun onClick(result: GetAllUsaha)
     }
 }
 

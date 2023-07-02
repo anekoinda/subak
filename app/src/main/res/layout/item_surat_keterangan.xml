@@ -39,24 +39,24 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/namaProduk"
+                        android:id="@+id/nomorSuratKeterangan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginBottom="2dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="nama produk"
+                        android:text="nomor SK"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/jenisProduk"
+                        android:id="@+id/tanggalSuratKeterangan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginBottom="2dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="jenis produk"
+                        android:text="tanggal SK"
                         android:textColor="@color/dark_grey"
                         android:textSize="12sp" />
 

@@ -41,8 +41,9 @@ class AddProduk : AppCompatActivity() {
         supportActionBar?.title = "Tambah Produk"
 
         setJenisProduk()
-        Log.e("id add produk", "$getIdSubak")
+
         getIdSubak = intent.getStringExtra("idsubak")
+        Log.e("id add produk", "$getIdSubak")
         if (getIdSubak != null) {
             val idtempsubak = getIdSubak
             binding.btnLanjutkan.setOnClickListener {
@@ -144,6 +145,7 @@ class AddProduk : AppCompatActivity() {
             val service = ApiConfig.getApiService().addDataProduk(
                 "Bearer $it",
                 getIdSubak!!.toInt(),
+                1,
                 jenis_id,
                 nama
             )

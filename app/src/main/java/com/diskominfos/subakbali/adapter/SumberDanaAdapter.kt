@@ -33,7 +33,7 @@ class SumberDanaAdapter(
             nominal.text = data.nominal
             jenis.text = data.jenis_sumber_dana?.nama
             tahun.text = data.tahun
-            Log.e("tahun sumber dana", data.tahun)
+            Log.e("jenis sumber dana", data.jenis_sumber_dana.nama)
         }
     }
 
