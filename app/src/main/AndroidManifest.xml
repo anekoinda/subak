@@ -3,18 +3,20 @@
     package="com.diskominfos.subakbali">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <permission
         android:name="com.diskominfos.subakbali.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
+        android:maxSdkVersion="24" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="24" />
 
     <application
         android:allowBackup="true"
@@ -22,12 +24,173 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.SubakBali">
+        android:theme="@style/Theme.SubakBali"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".DetailProduk"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.sumberair.DetailSumberAir"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.sumberair.AddSumberAir"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.datalain.AlihFungsi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.datalain.Usaha"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.datalain.Produk"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SubDataLain"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SumberAir"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".EditSumberDana"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DetailSumberDana"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".EditTradisi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DetailTradisi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.parahyangan.PuraSubak"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.parahyangan.Tradisi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.parahyangan.AddTradisi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DraftSubak"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MainList"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.datawilayah.AddPolygonSubakDesaAdat"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.datawilayah.AddPolygonSubakDesaDinas"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.dataumum.EditMarkerSubak"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.dataumum.EditTempSubak"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.dataumum.DetailTempSubak"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MapActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ui.auth.LoginActivity"
-            android:noHistory="true"
-            android:exported="false">
+            android:exported="false"
+            android:noHistory="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -62,7 +225,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.tambah.sumberair.AddSumberAir"
+            android:name=".ui.tambah.sumberair.AddSumberAirSubak"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -90,7 +253,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.tambah.parahyangan.AddDataOdalan"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -118,7 +281,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.tambah.krama.AddKrama"
+            android:name=".ui.tambah.datawilayah.AddDataWilayah"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -139,7 +302,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.tambah.parahyangan.AddDataOdalan"
+            android:name=".ui.tambah.ListData"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -168,20 +331,22 @@
         </activity>
         <activity
             android:name=".ui.tambah.datawilayah.AddWilayahDesaDinas"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".ui.tambah.datawilayah.AddDataWilayah">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.tambah.datawilayah.AddWilayahDesaAdat"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".ui.tambah.datawilayah.AddDataWilayah">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.tambah.datawilayah.AddDataWilayah"
+            android:name=".HomeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -197,13 +362,13 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDeg6nPljLVx15aYfww-uBrTq9afsNjcN0" />
+            android:value="AIzaSyB0aGj52CyWR03v5xfcR_DU4fnD-ads5Dg" />
 
         <activity
             android:name=".ui.tambah.dataumum.AddDataUmum"
             android:exported="false" />
         <activity
-            android:name=".ui.tambah.ListData"
+            android:name=".ui.tambah.krama.AddKrama"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -214,7 +379,8 @@
             android:exported="true" />
         <activity
             android:name=".SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.SubakBali.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

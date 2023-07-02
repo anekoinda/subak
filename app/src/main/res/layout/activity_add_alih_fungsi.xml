@@ -36,6 +36,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/namaAlihFungsi"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -56,7 +57,7 @@
                     android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnTanggalMulai"
+                    android:id="@+id/btnTanggalAlihFungsi"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -79,6 +80,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/luasAlihFungsi"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -99,6 +101,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/deskripsiAlihFungsi"
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
                     android:layout_marginTop="8dp"
@@ -139,6 +142,7 @@
             android:textColor="@color/green" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLanjutkan"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"

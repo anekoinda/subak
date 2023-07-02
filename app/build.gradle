@@ -41,7 +41,7 @@ android {
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
@@ -56,7 +56,7 @@ dependencies {
     implementation "androidx.customview:customview:1.1.0"
 
     //map
-    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     //card view
@@ -81,4 +81,16 @@ dependencies {
 
     //spinner searchable
     implementation 'com.github.leoncydsilva:SearchableSpinner:1.0.1'
+
+    //validation
+    implementation 'com.basgeekball:awesome-validation:4.3'
+
+    //circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //alert dialog
+    implementation 'com.github.f0ris.sweetalert:library:1.5.6'
+
+    //image
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.21'
 }

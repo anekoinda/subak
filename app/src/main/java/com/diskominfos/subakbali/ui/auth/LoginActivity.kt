@@ -17,6 +17,7 @@ import com.diskominfos.subakbali.api.ApiConfig
 import com.diskominfos.subakbali.api.UserRequest
 import com.diskominfos.subakbali.api.UserResponse
 import com.diskominfos.subakbali.databinding.ActivityLoginBinding
+import com.diskominfos.subakbali.model.SubakPreference
 import com.diskominfos.subakbali.model.UserPreference
 import com.diskominfos.subakbali.model.ViewModelFactory
 import retrofit2.Call
@@ -27,6 +28,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
+    var name: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +66,7 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val user = response.body()
                     if (user != null) {
+                        name = user.data?.name.toString()
                         Log.e("name", user.data?.name.toString())
                         Log.e("token", user.data?.token.toString())
                     }
@@ -72,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
                     if (user != null) {
                         loginViewModel.saveUser(user.data?.token!!)
                         loginViewModel.saveUsername(user.data?.username!!)
+                        loginViewModel.saveName(user.data?.name!!)
                     }
                     success()
 

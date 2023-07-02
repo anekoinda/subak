@@ -1,85 +1,218 @@
 package com.diskominfos.subakbali.ui.tambah.dataumum
 
-
-import android.app.Activity
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.view.View
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import cn.pedant.SweetAlert.SweetAlertDialog
+import com.basgeekball.awesomevalidation.AwesomeValidation
+import com.basgeekball.awesomevalidation.ValidationStyle
+import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import com.diskominfos.subakbali.R
+import com.diskominfos.subakbali.api.*
 import com.diskominfos.subakbali.api.ApiConfig.Companion.getApiService
-import com.diskominfos.subakbali.api.DataDesaDinas
-import com.diskominfos.subakbali.api.DataKabupaten
-import com.diskominfos.subakbali.api.DataKecamatan
-import com.diskominfos.subakbali.api.DataSubakResponse
 import com.diskominfos.subakbali.databinding.ActivityAddDataUmumBinding
 import com.diskominfos.subakbali.model.UserPreference
 import com.diskominfos.subakbali.model.ViewModelFactory
 import com.diskominfos.subakbali.ui.auth.LoginActivity
+import com.diskominfos.subakbali.ui.tambah.datawilayah.AddDataWilayah
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.leo.searchablespinner.SearchableSpinner
 import com.leo.searchablespinner.interfaces.OnItemSelectListener
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+import pl.droidsonroids.gif.GifImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+import java.util.*
+import kotlin.collections.ArrayList
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
-    private lateinit var map: GoogleMap
     private lateinit var addDataUmumViewModel: AddDataUmumViewModel
     private lateinit var binding: ActivityAddDataUmumBinding
-    private val jenisSubak = arrayListOf("Subak", "Abian")
+    private val jenisSubak = arrayListOf("Subak Basah", "Subak Abian")
     var idKabupatenSelected: String? = ""
     var idKecamatanSelected: String? = ""
     var idDesaSelected: String? = ""
     var jenisSubakSelected: String? = ""
-    var latitude: String? = ""
-    var longitude: String? = ""
     var activityStatus: String = "add"
     var isTextInputLayoutClicked: Boolean = false
+    private lateinit var mMap: GoogleMap
+    private var latitude: String? = ""
+    private var longitude: String? = ""
+    private var idsubak: String? = ""
+    private var awesomeValidation: AwesomeValidation = AwesomeValidation(ValidationStyle.BASIC)
+    private lateinit var currentLocation: Location
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private val permissionCode = 101
 
     private val resultCOntract =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            if (result?.resultCode == Activity.RESULT_OK) {
-                latitude = result.data?.getStringExtra(AddMarkerSubak.EXTRA_LAT)
-                longitude = result.data?.getStringExtra(AddMarkerSubak.EXTRA_LNG)
-                binding.btnLokasi.text = "$latitude, $longitude"
+            if (result?.resultCode == RESULT_OK) {
+                latitude = result.data?.getStringExtra("lat").toString()
+                longitude = result.data?.getStringExtra("lng").toString()
+
+                Log.e("lat", "$latitude")
+                Log.e("lng", "$longitude")
+
+                val latLng = LatLng("$latitude".toDouble(), "$longitude".toDouble())
+                mMap.addMarker(MarkerOptions().position(latLng))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+
+                getCompleteAddressString("$latitude".toDouble(), "$longitude".toDouble())
             }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_data_umum)
         binding = ActivityAddDataUmumBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(this@AddDataUmum)
+        fetchLocation()
+
+        supportActionBar?.title = "Tambah Data Umum Subak"
+
         setJenisSubak()
         setKabupaten()
+
+        awesomeValidation.addValidation(
+            binding.namaSubak,
+            RegexTemplate.NOT_EMPTY,
+            "Nama subak belum terisi"
+        )
+        awesomeValidation.addValidation(
+            binding.luasSubak,
+            RegexTemplate.NOT_EMPTY,
+            "Luas subak belum terisi"
+        )
+        awesomeValidation.addValidation(
+            binding.batasUtaraSubak,
+            RegexTemplate.NOT_EMPTY,
+            "Batas utara subak belum terisi"
+        )
+        awesomeValidation.addValidation(
+            binding.batasBaratSubak,
+            RegexTemplate.NOT_EMPTY,
+            "Batas barat subak belum terisi"
+        )
+        awesomeValidation.addValidation(
+            binding.batasSelatanSubak,
+            RegexTemplate.NOT_EMPTY,
+            "Batas selatan subak belum terisi"
+        )
+        awesomeValidation.addValidation(
+            binding.batasTimurSubak,
+            RegexTemplate.NOT_EMPTY,
+            "Batas timur subak belum terisi"
+        )
 
         binding.btnLokasi.setOnClickListener {
             val intent = Intent(this, AddMarkerSubak::class.java)
             resultCOntract.launch(intent)
         }
-        binding.btnLanjutkan.setOnClickListener { addDataSubak() }
+
+        binding.btnLanjutkan.setOnClickListener {
+//            if (awesomeValidation.validate() && jenisSubakSelected !== "" && idKabupatenSelected !== "" && idKecamatanSelected !== "" && idDesaSelected !== "" && latitude !== "" && longitude !== "") {
+                addDataSubak()
+            val gifImageView = GifImageView(this)
+            gifImageView.setImageResource(R.drawable.check)
+            SweetAlertDialog(this@AddDataUmum)
+                .setTitleText("Berhasil input data umum!")
+                .setConfirmButton("Lanjutkan") {
+                    val bundle = Bundle()
+                    val intent = Intent(this@AddDataUmum, AddDataWilayah::class.java)
+                    bundle.putString("idsubak", idsubak)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                    finish()
+                }
+                .setCustomView(gifImageView)
+                .show()
+//            }
+
+            if (jenisSubakSelected == "") {
+                binding.errorSubak.requestFocus()
+                binding.errorSubak.error = "Pilih jenis subak"
+                binding.errorSubak.setTextColor(Color.RED)
+            }
+            if (idKabupatenSelected == "") {
+                binding.errorKabupaten.requestFocus()
+                binding.errorKabupaten.error = "Pilih kabupaten"
+                binding.errorKabupaten.setTextColor(Color.RED)
+            }
+            if (idKecamatanSelected == "") {
+                binding.errorKecamatan.requestFocus()
+                binding.errorKecamatan.error = "Pilih kecamatan"
+                binding.errorKecamatan.setTextColor(Color.RED)
+            }
+            if (idDesaSelected == "") {
+                binding.errorDesa.requestFocus()
+                binding.errorDesa.error = "Pilih desa"
+                binding.errorDesa.setTextColor(Color.RED)
+            }
+            if (latitude == "" && longitude == "") {
+                binding.errorLokasi.requestFocus()
+                binding.errorLokasi.error = "Input lokasi subak"
+                binding.errorLokasi.setTextColor(Color.RED)
+            }
+        }
+    }
+
+    private fun getCompleteAddressString(LATITUDE: Double, LONGITUDE: Double): String? {
+        var strAdd = ""
+        val geocoder = Geocoder(this, Locale.getDefault())
+        try {
+            val addresses: List<Address>? = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
+            if (addresses != null) {
+                val returnedAddress: Address = addresses[0]
+                val strReturnedAddress = StringBuilder("")
+                for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                strAdd = strReturnedAddress.toString()
+                binding.btnLokasi.text = strReturnedAddress.toString()
+            } else {
+                binding.btnLokasi.text = "No Address returned!"
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            binding.btnLokasi.text = "Canont get Address!"
+        }
+        return strAdd
     }
 
     private fun addDataSubak() {
+        addDataUmumViewModel.addSubak()
         addDataUmumViewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
@@ -138,27 +271,16 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
                 created_by
             )
 
-            service.enqueue(object : Callback<DataSubakResponse> {
-
+            service.enqueue(object : Callback<SingleTempSubakResponse> {
                 override fun onResponse(
-                    call: Call<DataSubakResponse>,
-                    response: Response<DataSubakResponse>
+                    call: Call<SingleTempSubakResponse>,
+                    response: Response<SingleTempSubakResponse>
                 ) {
                     Log.e("token", it)
                     if (response.isSuccessful) {
-                        Toast.makeText(
-                            this@AddDataUmum,
-                            "Berhasil input data subak",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        val responseBody = response.body()
-                        if (responseBody != null && !responseBody.error) {
-                            Toast.makeText(
-                                this@AddDataUmum,
-                                responseBody.message,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                        val subak = response.body()
+                        idsubak = subak?.data?.id.toString()
+                        Log.e("id subak di data umum", subak?.data?.id.toString())
                     } else {
                         Toast.makeText(
                             this@AddDataUmum,
@@ -168,7 +290,7 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
                     }
                 }
 
-                override fun onFailure(call: Call<DataSubakResponse>, t: Throwable) {
+                override fun onFailure(call: Call<SingleTempSubakResponse>, t: Throwable) {
                     Toast.makeText(
                         this@AddDataUmum,
                         "Cannot instance Retrofit",
@@ -176,7 +298,6 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
                     ).show()
                 }
             })
-
         }
     }
 
@@ -191,7 +312,9 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
             ) {
                 if (isTextInputLayoutClicked)
                     jenisSubakSelected = selectedString
-                    binding.textSubak.text = jenisSubakSelected
+                binding.textSubak.text = jenisSubakSelected
+                binding.textSubak.setTextColor(Color.BLACK)
+                binding.errorSubak.visibility = View.GONE
             }
         }
 
@@ -238,18 +361,15 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
                                 position: Int,
                                 selectedString: String
                             ) {
-                                Toast.makeText(
-                                    this@AddDataUmum,
-                                    "${searchableSpinner.selectedItem}  ${searchableSpinner.selectedItemPosition}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
                                 if (idKabupaten.count() >= 0 && position >= 0) {
                                     setKecamatan(idKabupaten[position])
                                 }
                                 idKabupatenSelected = idKabupaten[position]
-                                if (isTextInputLayoutClicked)
+                                if (isTextInputLayoutClicked) {
                                     binding.textKabupaten.text = selectedString
-                                else
+                                    binding.textKabupaten.setTextColor(Color.BLACK)
+                                    binding.errorKabupaten.visibility = View.GONE
+                                } else
                                     binding.editTextSpinner.setText(selectedString)
                             }
                         }
@@ -269,9 +389,6 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
                         }
                     }
                 }
-            } else {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
             }
         }
     }
@@ -311,9 +428,11 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
                                     setDesa(idKecamatan[position])
                                 }
                                 idKecamatanSelected = idKecamatan[position]
-                                if (isTextInputLayoutClicked)
+                                if (isTextInputLayoutClicked) {
                                     binding.textKecamatan.text = selectedString
-                                else
+                                    binding.textKecamatan.setTextColor(Color.BLACK)
+                                    binding.errorKecamatan.visibility = View.GONE
+                                } else
                                     binding.editTextSpinner.setText(selectedString)
                             }
                         }
@@ -372,9 +491,11 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
                                 selectedString: String
                             ) {
                                 idDesaSelected = idDesa[position]
-                                if (isTextInputLayoutClicked)
+                                if (isTextInputLayoutClicked) {
                                     binding.textDesa.text = selectedString
-                                else
+                                    binding.textDesa.setTextColor(Color.BLACK)
+                                    binding.errorDesa.visibility = View.GONE
+                                } else
                                     binding.editTextSpinner.setText(selectedString)
                             }
                         }
@@ -404,14 +525,44 @@ class AddDataUmum : AppCompatActivity(), OnMapReadyCallback {
     private fun getListDesa(kabupaten: MutableList<DataDesaDinas>) {
     }
 
+    private fun fetchLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION
+            ) !=
+            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION
+            ) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), permissionCode
+            )
+            return
+        }
+        val task = fusedLocationProviderClient.lastLocation
+        task.addOnSuccessListener { location ->
+            if (location != null) {
+                currentLocation = location
+                val supportMapFragment = (supportFragmentManager.findFragmentById(R.id.map) as
+                        SupportMapFragment?)!!
+                supportMapFragment.getMapAsync(this@AddDataUmum)
+            }
+        }
+    }
+
     override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-        val sydney = LatLng(-8.613729, 115.214033)
-        map.addMarker(
-            MarkerOptions()
-                .position(sydney)
-                .title("Marker in Subak Sembung")
-        )
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        mMap = googleMap
+        val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        googleMap.uiSettings.isScrollGesturesEnabled = false
+
+        mMap.setOnMapClickListener {
+            binding.errorLokasi.visibility = View.GONE
+            mMap.clear()
+            val intent = Intent(this, AddMarkerSubak::class.java)
+            resultCOntract.launch(intent)
+            onResume()
+        }
     }
 }

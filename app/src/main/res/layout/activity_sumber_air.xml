@@ -16,35 +16,72 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Sumber Air"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Sumber Air Subak"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/btnAddSumberAirSubak"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="right"
+                    android:text="+ Tambah Sumber Air"
+                    android:textColor="@color/green"
+                    android:textSize="14sp" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <LinearLayout
+                android:id="@+id/emptyObjectSumberAir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/empty_box" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="Belum ada data yang ditambahkan."
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sumber_air"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_button"
-                android:fontFamily="@font/poppins_medium"
-                android:text="+ Sumber Air"
-                android:textColor="@color/white" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                tools:listitem="@layout/item_sumber_air" />
         </LinearLayout>
 
     </ScrollView>
@@ -63,23 +100,27 @@
         android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLewati"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button_stroke"
             android:fontFamily="@font/poppins_medium"
-            android:text="LEWATI"
-            android:textColor="@color/green" />
+            android:text="Lewati"
+            android:textAllCaps="false"
+            android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLanjutkan"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button"
             android:fontFamily="@font/poppins_medium"
-            android:text="LANJUTKAN"
+            android:text="Lanjutkan"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>
 

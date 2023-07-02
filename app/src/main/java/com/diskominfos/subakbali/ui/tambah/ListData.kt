@@ -3,22 +3,27 @@ package com.diskominfos.subakbali.ui.tambah
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.diskominfos.subakbali.ui.tambah.datalain.Produk
 import com.diskominfos.subakbali.R
 import com.diskominfos.subakbali.databinding.ActivityListDataBinding
-import com.diskominfos.subakbali.ui.tambah.datalain.AddDataLain
+import com.diskominfos.subakbali.ui.tambah.datalain.AddAlihFungsi
+import com.diskominfos.subakbali.ui.tambah.datalain.AddUsaha
 import com.diskominfos.subakbali.ui.tambah.dataumum.AddDataUmum
 import com.diskominfos.subakbali.ui.tambah.datawilayah.AddDataWilayah
 import com.diskominfos.subakbali.ui.tambah.dokumen.AddDokumen
 import com.diskominfos.subakbali.ui.tambah.krama.AddKrama
 import com.diskominfos.subakbali.ui.tambah.parahyangan.AddDataParahyangan
-import com.diskominfos.subakbali.ui.tambah.sumberair.AddSumberAir
-import com.diskominfos.subakbali.ui.tambah.sumberdana.AddSumberDana
+import com.diskominfos.subakbali.ui.tambah.parahyangan.Tradisi
+import com.diskominfos.subakbali.ui.tambah.sumberair.AddSumberAirSubak
+import com.diskominfos.subakbali.ui.tambah.sumberdana.SumberDana
 
 class ListData : AppCompatActivity() {
     private lateinit var binding: ActivityListDataBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_data)
+
+        supportActionBar?.hide()
 
         binding = ActivityListDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,6 +43,11 @@ class ListData : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.dataTradisi.setOnClickListener {
+            val intent = Intent(this, Tradisi::class.java)
+            startActivity(intent)
+        }
+
         binding.dataKrama.setOnClickListener {
             val intent = Intent(this, AddKrama::class.java)
             startActivity(intent)
@@ -49,17 +59,27 @@ class ListData : AppCompatActivity() {
         }
 
         binding.dataDana.setOnClickListener {
-            val intent = Intent(this, AddSumberDana::class.java)
+            val intent = Intent(this, SumberDana::class.java)
             startActivity(intent)
         }
 
         binding.dataAir.setOnClickListener {
-            val intent = Intent(this, AddSumberAir::class.java)
+            val intent = Intent(this, AddSumberAirSubak::class.java)
             startActivity(intent)
         }
 
-        binding.dataLainnya.setOnClickListener {
-            val intent = Intent(this, AddDataLain::class.java)
+        binding.dataProduk.setOnClickListener {
+            val intent = Intent(this, Produk::class.java)
+            startActivity(intent)
+        }
+
+        binding.dataUsaha.setOnClickListener {
+            val intent = Intent(this, AddUsaha::class.java)
+            startActivity(intent)
+        }
+
+        binding.dataAlihFungsi.setOnClickListener {
+            val intent = Intent(this, AddAlihFungsi::class.java)
             startActivity(intent)
         }
     }

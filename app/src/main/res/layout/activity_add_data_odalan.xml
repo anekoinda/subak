@@ -31,164 +31,224 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Jenis Odalan"
+                    android:text="Jenis Odalan Berdasarkan"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/spnOdalan"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
-                    android:spinnerMode="dropdown"
-                    android:textSize="16sp"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Saptawara"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <Spinner
-                    android:id="@+id/spnSaptawara"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
-                    android:spinnerMode="dropdown"
-                    android:textSize="16sp"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Pancawara"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <Spinner
-                    android:id="@+id/spnPancawara"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
-                    android:spinnerMode="dropdown"
-                    android:textSize="16sp"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Bulan"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <Spinner
-                    android:id="@+id/spnBulan"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
-                    android:spinnerMode="dropdown"
-                    android:textSize="16sp"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Odalan Wuku"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/textJenisOdalan"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/custom_input"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Pilih Jenis Odalan"
+                        android:textSize="16sp" />
+                </RelativeLayout>
 
                 <EditText
+                    android:id="@+id/editTextSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1" />
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Masukkan odalan wuku"
-                    android:inputType="textEmailAddress|textNoSuggestions"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Odalan Sasih"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    <LinearLayout
+                        android:id="@+id/jenisOdalanSasih"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Masukkan odalan sasih"
-                    android:inputType="textEmailAddress|textNoSuggestions"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Odalan Berdasakan Purnama/Tilem"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Pemangku"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical">
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Masukkan nama pemangku"
-                    android:inputType="textEmailAddress|textNoSuggestions"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/textJenisBulan"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/custom_input"
+                                android:drawableEnd="@drawable/ic_arrow_down"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center_vertical"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:text="Pilih Bulan Odalan"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Telepon Pemangku"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Masukkan telepon pemangku"
-                    android:inputType="textEmailAddress|textNoSuggestions"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Sasih"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/textJenisSasih"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/custom_input"
+                                android:drawableEnd="@drawable/ic_arrow_down"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center_vertical"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:text="Pilih Sasih"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Keterangan Tambahan Odalan"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/custom_input"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Keterangan tambahan terkait tegak odalan"
+                            android:inputType="textEmailAddress|textNoSuggestions"
+                            android:paddingStart="12dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/jenisOdalanPawukon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Wuku"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/textWuku"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/custom_input"
+                                android:drawableEnd="@drawable/ic_arrow_down"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center_vertical"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:text="Pilih Wuku"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Saptawara"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/textSaptawara"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/custom_input"
+                                android:drawableEnd="@drawable/ic_arrow_down"
+                                android:fontFamily="@font/poppins_regular"
+                                android:gravity="center_vertical"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:text="Pilih Saptawara"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Pancawara"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/custom_input"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Keterangan tambahan terkait tegak odalan"
+                            android:inputType="textEmailAddress|textNoSuggestions"
+                            android:paddingStart="12dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -217,6 +277,7 @@
             android:textColor="@color/green" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSimpan"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"

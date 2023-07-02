@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
@@ -17,37 +16,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/default_image" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="bottom"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_gravity="end"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@drawable/custom_circle_button"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="+" />
-                </LinearLayout>
-            </RelativeLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -60,21 +28,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Informasi Umum"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Nama Subak"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_font"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/namaSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Masukkan nama subak"
                     android:inputType="textEmailAddress|textNoSuggestions"
                     android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
                     android:textSize="16sp" />
 
                 <TextView
@@ -83,21 +61,41 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Jenis Subak"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_font"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/textSubak"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_gravity="right"
-                    android:gravity="center_vertical"
-                    android:paddingStart="8dp"
-                    android:text="Pilih Jenis Subak"
-                    android:background="@drawable/custom_input"
-                    android:textSize="16sp" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/textSubak"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/custom_input"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Pilih Jenis Subak"
+                        android:textSize="16sp" />
+
+                    <android.widget.TextView
+                        android:id="@+id/errorSubak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/textSubak"
+                        android:layout_alignBottom="@+id/textSubak"
+                        android:layout_marginBottom="12dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:paddingRight="30dp" />
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/editTextSpinner"
@@ -114,133 +112,58 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Kabupaten"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textKabupaten"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_gravity="right"
-                    android:gravity="center_vertical"
-                    android:paddingStart="8dp"
-                    android:text="Pilih Kabupaten"
-                    android:background="@drawable/custom_input"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Kecamatan"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textKecamatan"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_gravity="right"
-                    android:gravity="center_vertical"
-                    android:paddingStart="8dp"
-                    android:text="Pilih Kecamatan"
-                    android:background="@drawable/custom_input"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Desa Pengampu"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textDesa"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_gravity="right"
-                    android:gravity="center_vertical"
-                    android:paddingStart="8dp"
-                    android:text="Pilih Desa Pengampu"
-                    android:background="@drawable/custom_input"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
                     android:text="Luas Subak (Hektare)"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_font"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/luasSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Masukkan luas subak"
                     android:inputType="number"
                     android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
                     android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#E3E3E3" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Koordinat Bale Subak"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Batas Subak"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <FrameLayout
-                    android:id="@+id/container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLokasi"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:gravity="start|center_vertical"
-                    android:hint="Input lokasi subak"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Batas Utara"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_font"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/batasUtaraSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Masukkan batas utara subak"
                     android:inputType="textEmailAddress|textNoSuggestions"
                     android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
                     android:textSize="16sp" />
 
                 <TextView
@@ -249,7 +172,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Batas Timur"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_font"
                     android:textSize="16sp" />
 
                 <EditText
@@ -262,6 +185,7 @@
                     android:hint="Masukkan batas timur subak"
                     android:inputType="textEmailAddress|textNoSuggestions"
                     android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
                     android:textSize="16sp" />
 
                 <TextView
@@ -270,19 +194,20 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Batas Selatan"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_font"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/batasSelatanSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Masukkan batas selatan subak"
                     android:inputType="textEmailAddress|textNoSuggestions"
                     android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
                     android:textSize="16sp" />
 
                 <TextView
@@ -291,20 +216,218 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Batas Barat"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_font"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/batasBaratSubak"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Masukkan batas barat subak"
                     android:inputType="textEmailAddress|textNoSuggestions"
                     android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
                     android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#E3E3E3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Lokasi Subak"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Kabupaten"
+                    android:textColor="@color/black_font"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/textKabupaten"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/custom_input"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Pilih Kabupaten"
+                        android:textSize="16sp" />
+
+                    <android.widget.TextView
+                        android:id="@+id/errorKabupaten"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/textKabupaten"
+                        android:layout_alignBottom="@+id/textKabupaten"
+                        android:layout_marginBottom="12dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:paddingRight="30dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Kecamatan"
+                    android:textColor="@color/black_font"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/textKecamatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/custom_input"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Pilih Kecamatan"
+                        android:textSize="16sp" />
+
+                    <android.widget.TextView
+                        android:id="@+id/errorKecamatan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/textKecamatan"
+                        android:layout_alignBottom="@+id/textKecamatan"
+                        android:layout_marginBottom="12dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:paddingRight="30dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Desa Pengampu"
+                    android:textColor="@color/black_font"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/textDesa"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/custom_input"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Pilih Desa Pengampu"
+                        android:textSize="16sp" />
+
+                    <android.widget.TextView
+                        android:id="@+id/errorDesa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/textDesa"
+                        android:layout_alignBottom="@+id/textDesa"
+                        android:layout_marginBottom="12dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:paddingRight="30dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Koordinat Bale Subak"
+                    android:textColor="@color/black_font"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/btnLokasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/custom_input"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Input Lokasi Subak"
+                        android:textSize="16sp" />
+
+                    <android.widget.TextView
+                        android:id="@+id/errorLokasi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/btnLokasi"
+                        android:layout_alignBottom="@+id/btnLokasi"
+                        android:layout_marginBottom="12dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:paddingRight="30dp" />
+                </RelativeLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    card_view:cardCornerRadius="8dp">
+
+                    <fragment
+                        android:id="@+id/map"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:context=".ui.tambah.dataumum.AddDataUmum" />
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -312,6 +435,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
+                android:gravity="bottom"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -322,8 +446,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/custom_button_stroke"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="LEWATI"
-                    android:textColor="@color/green" />
+                    android:text="Kembali"
+                    android:textAllCaps="false"
+                    android:textColor="@color/red" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnLanjutkan"
@@ -333,7 +458,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/custom_button"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="LANJUTKAN"
+                    android:text="Lanjutkan"
+                    android:textAllCaps="false"
                     android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>

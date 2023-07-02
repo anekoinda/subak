@@ -38,6 +38,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSearch"
+            android:onClick="searchLocation"
             android:layout_weight="4"
             android:layout_gravity="center"
             android:gravity="center"
@@ -48,6 +49,7 @@
             android:background="@drawable/custom_button"
             android:layout_height="match_parent"/>
     </LinearLayout>
+
     <ImageView
         android:id="@+id/iv_marker"
         android:layout_width="40dp"
@@ -79,7 +81,8 @@
             android:background="@drawable/custom_button_stroke"
             android:fontFamily="@font/poppins_medium"
             android:text="BATAL"
-            android:textColor="@color/green" />
+            android:textAllCaps="false"
+            android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSimpan"
@@ -90,6 +93,7 @@
             android:background="@drawable/custom_button"
             android:fontFamily="@font/poppins_medium"
             android:text="SIMPAN"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>
 </FrameLayout>

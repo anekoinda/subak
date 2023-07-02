@@ -10,9 +10,10 @@
 
     <color name="blue">#005FF9</color>
     <color name="grey">#333333</color>
-    <color name="black_font">#2B2B2B</color>
+    <color name="black_font">#3D3D3D</color>
     <color name="dark_grey">#787878</color>
     <color name="light_grey">#D1D1D1</color>
-    <color name="bg_grey">#FAFAFA</color>
+    <color name="bg_grey">#F6F6F6</color>
     <color name="red">#FF0000</color>
+    <color name="orange">#FFB800</color>
 </resources>

@@ -13,8 +13,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.diskominfos.subakbali.R
 import com.diskominfos.subakbali.databinding.ActivityAddMarkerSubakBinding
@@ -34,8 +32,6 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val permissionCode = 101
-    private var lat: String = ""
-    private var long: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,10 +64,10 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
         task.addOnSuccessListener { location ->
             if (location != null) {
                 currentLocation = location
-                Toast.makeText(
-                    applicationContext, currentLocation.latitude.toString() + "" +
-                            currentLocation.longitude, Toast.LENGTH_SHORT
-                ).show()
+//                Toast.makeText(
+//                    applicationContext, currentLocation.latitude.toString() + ", " +
+//                            currentLocation.longitude, Toast.LENGTH_SHORT
+//                ).show()
                 val supportMapFragment = (supportFragmentManager.findFragmentById(R.id.mapSubak) as
                         SupportMapFragment?)!!
                 supportMapFragment.getMapAsync(this@AddMarkerSubak)
@@ -82,8 +78,7 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
 
         mMap.setOnMapClickListener { latlng ->
             mMap.clear()
@@ -91,19 +86,15 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
             val location = LatLng(latlng.latitude, latlng.longitude)
             mMap.addMarker(MarkerOptions().position(location))
 
-            Toast.makeText(
-                applicationContext,
-                latlng.latitude.toString() + " " + latlng.longitude,
-                Toast.LENGTH_LONG
-            ).show()
-
             val lat = latlng.latitude.toString()
-            val long = latlng.longitude.toString()
+            val lng = latlng.longitude.toString()
 
             binding.btnSimpan.setOnClickListener {
-                intent.putExtra(EXTRA_LAT, lat)
-                intent.putExtra(EXTRA_LNG, long)
+                intent.putExtra("lat", lat)
+                intent.putExtra("lng", lng)
                 setResult(Activity.RESULT_OK, intent)
+                Log.e("lat", lat)
+                Log.e("lng", lng)
                 finish()
             }
         }
@@ -115,7 +106,7 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
         var addressList: List<Address>? = null
 
         if (location == "") {
-//            Toast.makeText(applicationContext, "provide location", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Masukkan lokasi yang ingin dicari!", Toast.LENGTH_SHORT).show()
         } else {
             val geoCoder = Geocoder(this)
             try {
@@ -123,24 +114,29 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-            val address = addressList!![0]
-            val latLng = LatLng(address.latitude, address.longitude)
-            mMap.addMarker(MarkerOptions().position(latLng).title(location))
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-            Toast.makeText(
-                applicationContext,
-                address.latitude.toString() + " " + address.longitude,
-                Toast.LENGTH_LONG
-            ).show()
 
-            val lat = address.latitude.toString()
-            val long = address.longitude.toString()
+            if (addressList != null && addressList.isNotEmpty()) {
+                val address = addressList[0]
+                val latLng = LatLng(address.latitude, address.longitude)
+                mMap.addMarker(MarkerOptions().position(latLng).title(location))
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+                Toast.makeText(
+                    applicationContext,
+                    "Lokasi ditemukan!",
+                    Toast.LENGTH_LONG
+                ).show()
 
-            binding.btnSimpan.setOnClickListener {
-                intent.putExtra(EXTRA_LAT, lat)
-                intent.putExtra(EXTRA_LNG, long)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
+                val lat = address.latitude.toString()
+                val lng = address.longitude.toString()
+
+                binding.btnSimpan.setOnClickListener {
+                    intent.putExtra("lat", lat)
+                    intent.putExtra("lng", lng)
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                }
+            } else {
+                Toast.makeText(applicationContext, "Lokasi tidak ditemukan!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -157,10 +153,5 @@ class AddMarkerSubak : AppCompatActivity(), OnMapReadyCallback {
                 fetchLocation()
             }
         }
-    }
-
-    companion object {
-        const val EXTRA_LAT = ""
-        const val EXTRA_LNG = ""
     }
 }

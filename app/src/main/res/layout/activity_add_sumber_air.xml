@@ -36,6 +36,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/nama"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -46,110 +47,163 @@
                     android:paddingStart="12dp"
                     android:textSize="16sp" />
 
+                <EditText
+                    android:id="@+id/editTextSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Panjang Saluran"
+                    android:text="Kabupaten"
+                    android:textColor="@color/black_font"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/textKabupaten"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/custom_input"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Pilih Kabupaten"
+                        android:textSize="16sp" />
+
+                    <android.widget.TextView
+                        android:id="@+id/errorKabupaten"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/textKabupaten"
+                        android:layout_alignBottom="@+id/textKabupaten"
+                        android:layout_marginBottom="12dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:paddingRight="30dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Kecamatan"
+                    android:textColor="@color/black_font"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/textKecamatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/custom_input"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Pilih Kecamatan"
+                        android:textSize="16sp" />
+
+                    <android.widget.TextView
+                        android:id="@+id/errorKecamatan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/textKecamatan"
+                        android:layout_alignBottom="@+id/textKecamatan"
+                        android:layout_marginBottom="12dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:paddingRight="30dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Desa Pengampu"
+                    android:textColor="@color/black_font"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/textDesa"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/custom_input"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Pilih Desa Pengampu"
+                        android:textSize="16sp" />
+
+                    <android.widget.TextView
+                        android:id="@+id/errorDesa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@+id/textDesa"
+                        android:layout_alignBottom="@+id/textDesa"
+                        android:layout_marginBottom="12dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:paddingRight="30dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Deskripsi"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/deskripsiSumberAir"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="125dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/custom_input"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="Masukkan panjang saluran"
-                    android:inputType="textEmailAddress|textNoSuggestions"
+                    android:gravity="left"
+                    android:hint="Masukkan deskripsi sumber air"
+                    android:inputType="text"
                     android:paddingStart="12dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Satuan Panjang"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Masukkan satuan panjang"
-                    android:inputType="textEmailAddress|textNoSuggestions"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Debit Air"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Masukkan debit air"
-                    android:inputType="textEmailAddress|textNoSuggestions"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Satuan Debit Air"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Masukkan satuan debit air"
-                    android:inputType="textEmailAddress|textNoSuggestions"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Lokasi Pintu Air"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <FrameLayout
-                    android:id="@+id/container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLokasi"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:gravity="start|center_vertical"
-                    android:hint="Input lokasi pintu air"
-                    android:paddingStart="12dp"
+                    android:paddingTop="12dp"
                     android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
@@ -176,16 +230,19 @@
             android:background="@drawable/custom_button_stroke"
             android:fontFamily="@font/poppins_medium"
             android:text="Batal"
-            android:textColor="@color/green" />
+            android:textAllCaps="false"
+            android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTambah"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button"
             android:fontFamily="@font/poppins_medium"
-            android:text="Simpan"
+            android:textAllCaps="false"
+            android:text="Tambah"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

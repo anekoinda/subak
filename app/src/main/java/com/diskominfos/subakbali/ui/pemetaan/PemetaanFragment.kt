@@ -38,7 +38,6 @@ class PemetaanFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnPolygonClic
     private val binding get() = _binding!!
 
     override fun onCreateView(
-
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,18 +72,18 @@ class PemetaanFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnPolygonClic
         dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
         profilViewModel.getUser().observe(this) {
             if (it != "") {
-                dataViewModel.getSubak(it)
-                dataViewModel.subakList.observe(this) { subak ->
-                    subak.forEach { it ->
-                        if (it.lat != null && it.lng != null) {
-                            val coordinate = LatLng(it.lat, it.lng)
-                            googleMap.addMarker(
-                                MarkerOptions().position(coordinate).title(it.nama)
-                                    .snippet(it.jenis_subak)
-                            )
-                        }
-                    }
-                }
+//                dataViewModel.getSubak(it)
+//                dataViewModel.subakList.observe(this) { subak ->
+//                    subak.forEach { it ->
+//                        if (it.lat != null && it.lng != null) {
+//                            val coordinate = LatLng(it.lat, it.lng)
+//                            googleMap.addMarker(
+//                                MarkerOptions().position(coordinate).title(it.nama)
+//                                    .snippet(it.jenis_subak)
+//                            )
+//                        }
+//                    }
+//                }
             } else {
                 val intent = Intent(activity, LoginActivity::class.java)
                 activity?.startActivity(intent)

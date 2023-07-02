@@ -12,11 +12,6 @@
         android:title="@string/data" />
 
     <item
-        android:id="@+id/navigation_tambah"
-        android:icon="@drawable/ic_add"
-        android:title="@string/tambah" />
-
-    <item
         android:id="@+id/navigation_pemetaaan"
         android:icon="@drawable/ic_pemeteaan"
         android:title="@string/pemetaan" />

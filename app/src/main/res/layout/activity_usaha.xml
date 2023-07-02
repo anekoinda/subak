@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
     android:orientation="vertical"
-    tools:context=".ui.tambah.datalain.AlihFungsi">
+    tools:context=".ui.tambah.datalain.Usaha">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,12 +30,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Alih Fungsi"
+                    android:text="Usaha"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAddUsaha"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
@@ -43,7 +44,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/custom_button"
                 android:fontFamily="@font/poppins_medium"
-                android:text="+ Alih Fungsi"
+                android:text="+ Usaha"
                 android:textColor="@color/white" />
         </LinearLayout>
 

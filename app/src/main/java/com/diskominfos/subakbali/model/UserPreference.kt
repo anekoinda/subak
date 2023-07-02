@@ -21,6 +21,13 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         }
     }
 
+    fun getName(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[NAME] ?: ""
+        }
+    }
+
+
     suspend fun saveUser(user: String) {
         dataStore.edit { preferences ->
             val token = user.split("|")
@@ -33,6 +40,31 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         dataStore.edit { preferences ->
             preferences[USERNAME] = user
             Log.e("cek username", preferences[USERNAME].toString())
+        }
+    }
+
+    suspend fun saveName(user: String) {
+        dataStore.edit { preferences ->
+            preferences[NAME] = user
+            Log.e("cek name", preferences[NAME].toString())
+        }
+    }
+
+    fun getId(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[ID] ?: ""
+        }
+    }
+
+    suspend fun saveId(id: String) {
+        dataStore.edit { preferences ->
+            preferences[ID] = id
+            Log.e("cek id", preferences[ID].toString())
+        }
+    }
+    suspend fun addSubak() {
+        dataStore.edit { preferences ->
+            preferences[STATE_KEY] = true
         }
     }
 
@@ -50,12 +82,22 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         }
     }
 
+    suspend fun clearid() {
+        dataStore.edit { preferences ->
+            preferences[ID] = ""
+            preferences[STATE_KEY] = false
+            Log.e("cek id clear", preferences[ID].toString())
+        }
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: UserPreference? = null
         private val STATE_KEY = booleanPreferencesKey("state")
         private val TOKEN = stringPreferencesKey("token")
         private val USERNAME = stringPreferencesKey("username")
+        private val NAME = stringPreferencesKey("name")
+        private val ID = stringPreferencesKey("id")
 
         fun getInstance(dataStore: DataStore<androidx.datastore.preferences.core.Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {

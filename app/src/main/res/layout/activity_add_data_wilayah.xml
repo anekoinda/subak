@@ -29,74 +29,196 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins_semibold"
                     android:text="Area Subak"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:fontFamily="@font/poppins_regular"-->
+                <!--                    android:text="Gambar area subak"-->
+                <!--                    android:textColor="@color/dark_grey"-->
+                <!--                    android:textSize="14sp" />-->
 
                 <FrameLayout
                     android:id="@+id/container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnPolygon"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:gravity="start|center_vertical"
-                    android:hint="Masukkan lokasi area subak"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
+                    android:background="@color/white"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="@color/green"
+                    app:strokeWidth="1dp">
 
-                <TextView
+                    <fragment
+                        android:id="@+id/mapPolygon"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:context=".ui.tambah.datawilayah.AddDataWilayah" />
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#E3E3E3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Desa Adat"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/btnAddDesaAdat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="right"
+                        android:text="+ Tambah Desa Adat"
+                        android:textColor="@color/green"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/emptyObjectDesaAdat"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Area Subak di Desa Adat"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
 
-                <CheckBox
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/empty_box" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:text="Belum ada data yang ditambahkan."
+                        android:textColor="@color/grey"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!--                <CheckBox-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:text="Wilayah subak berada di satu desa adat" />-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_desa_adat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Wilayah subak berada di satu desa adat" />
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    tools:listitem="@layout/item_temp_subak_desa_adat" />
 
-                <androidx.appcompat.widget.AppCompatButton
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/custom_button"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="+ Desa Adat"
-                    android:textColor="@color/white" />
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#E3E3E3" />
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Desa Dinas"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/btnAddDesaDinas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="right"
+                        android:text="+ Tambah Desa Dinas"
+                        android:textColor="@color/green"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/emptyObjectDesaDinas"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Area Subak di Desa Dinas"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:gravity="center"
+                    android:visibility="visible"
+                    android:orientation="horizontal">
 
-                <CheckBox
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/empty_box" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:text="Belum ada data yang ditambahkan."
+                        android:textColor="@color/grey"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!--                <CheckBox-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:text="Wilayah subak berada di satu desa dinas" />-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_desa_dinas"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Wilayah subak berada di satu desa dinas" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/custom_button"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="+ Desa Dinas"
-                    android:textColor="@color/white" />
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    tools:listitem="@layout/item_temp_subak_desa_dinas" />
             </LinearLayout>
 
         </LinearLayout>
@@ -116,23 +238,27 @@
         android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLewati"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button_stroke"
             android:fontFamily="@font/poppins_medium"
-            android:text="LEWATI"
-            android:textColor="@color/green" />
+            android:text="Lewati"
+            android:textAllCaps="false"
+            android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSimpan"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button"
             android:fontFamily="@font/poppins_medium"
-            android:text="LANJUTKAN"
+            android:text="Simpan"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

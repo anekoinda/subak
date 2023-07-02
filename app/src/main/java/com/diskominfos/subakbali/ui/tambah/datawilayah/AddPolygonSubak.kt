@@ -1,8 +1,13 @@
 package com.diskominfos.subakbali.ui.tambah.datawilayah
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
@@ -10,32 +15,30 @@ import android.view.ActionMode
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.devs.mdmanager.*
 import com.diskominfos.subakbali.R
 import com.diskominfos.subakbali.databinding.ActivityAddPolygonSubakBinding
 import com.diskominfos.subakbali.ui.tambah.dataumum.AddDataUmum
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import java.io.IOException
 
 
-class AddPolygonSubak : AppCompatActivity(), View.OnClickListener, OnShapeRemoveListener,
-    OnShapeDrawListener {
-
-    companion object {
-        private val TAG = AddPolygonSubak::class.java.simpleName
-    }
-
+class AddPolygonSubak : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
     private lateinit var mMap: GoogleMap
+    private val polygonPoints = ArrayList<LatLng>()
+    private val markers = mutableListOf<Marker>()
     private lateinit var binding: ActivityAddPolygonSubakBinding
-    private var parentView: View? = null
-    private var actionMode: ActionMode? = null
-    private var mapDrawingManager: MapDrawingManager? = null
-//    private var polygons = []
-
+    private lateinit var currentLocation: Location
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private val permissionCode = 101
+    private var polygon: Polygon? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,98 +47,86 @@ class AddPolygonSubak : AppCompatActivity(), View.OnClickListener, OnShapeRemove
 
         supportActionBar?.title = "Area Lokasi Subak"
 
-        val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.polygonSubak) as SupportMapFragment
-        mapFragment.getMapAsync { gm ->
-            mMap = gm
-            mMap.getUiSettings().isMapToolbarEnabled = false
-            mMap.getUiSettings().isMyLocationButtonEnabled = true
-            //googleMap?.getUiSettings()?.isZoomControlsEnabled = true
-            //googleMap?.setMapType(GoogleMap.MAP_TYPE_SATELLITE)
-            mMap.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(LatLng(-8.613508437334934, 115.21408604140129), 16f)
-            )
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.polygonSubak) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
-            this.let {
-                mapDrawingManager = MDMBuilder(it.baseContext).withMap(gm).build()
-                mapDrawingManager?.removeListener = this
-                mapDrawingManager?.drawListener = this
-//                onClick(iv_polygon)
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(this@AddPolygonSubak)
+        fetchLocation()
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        mMap.setOnMapClickListener { latLng ->
+            polygonPoints.add(latLng)
+            val marker = mMap.addMarker(MarkerOptions().position(latLng).draggable(true))
+            markers.add(marker)
+            drawPolygon()
+        }
+        mMap.setOnMarkerDragListener(this)
+
+        binding.btnSimpan.setOnClickListener {
+            intent.putExtra("polygon", polygonPoints)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
+    }
+
+    override fun onMarkerDragStart(marker: Marker) {
+        // do nothing
+    }
+
+    override fun onMarkerDrag(marker: Marker) {
+        // do nothing
+    }
+
+    override fun onMarkerDragEnd(marker: Marker) {
+        val index = markers.indexOf(marker)
+        polygonPoints[index] = marker.position
+        drawPolygon()
+    }
+
+    private fun drawPolygon() {
+        if (polygonPoints.size < 3) return
+
+        polygon?.remove()
+
+        val polygonOptions = PolygonOptions().addAll(polygonPoints)
+
+            .strokeWidth(5f)
+            .strokeColor(Color.RED)
+            .fillColor(Color.argb(128, 255, 0, 0))
+        polygon = mMap.addPolygon(polygonOptions)
+    }
+
+    private fun fetchLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION
+            ) !=
+            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION
+            ) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), permissionCode
+            )
+            return
+        }
+        val task = fusedLocationProviderClient.lastLocation
+        task.addOnSuccessListener { location ->
+            if (location != null) {
+                currentLocation = location
+                val supportMapFragment =
+                    (supportFragmentManager.findFragmentById(R.id.polygonSubak) as
+                            SupportMapFragment?)!!
+                supportMapFragment.getMapAsync(this@AddPolygonSubak)
             }
         }
-
-        mapDrawingManager?.shapeType = ShapeType.POLYGON
-        //mapDrawingManager?.strokColor = AnimatorPolygon.POLY_STROKE_COLOR
-        //mapDrawingManager?.fillColor = AnimatorPolygon.POLY_FILL_COLOR
-        updateShapeSizeTotal(ShapeType.POLYGON)
-    }
-
-    fun updateShapeSizeTotal(shapeType: ShapeType) {
-        var total = 0f
-
-        when (shapeType) {
-            ShapeType.POLYGON ->
-                mapDrawingManager?.polygonList?.let {
-                    it.forEach {
-                        val titleParts = it.second.title.toString().split(" ")
-                        total += titleParts[0].toFloat()
-                    }
-//                    tv_size.text= String.format("%.2f sq. feet", total)
-                }
-            ShapeType.POLYLINE ->
-                mapDrawingManager?.polylineList?.let {
-                    it.forEach {
-                        val titleParts = it.second.title.toString().split(" ")
-                        total += titleParts[0].toFloat()
-                    }
-//                    tv_size.text= String.format("%.2f feet", total)
-                }
-
-            ShapeType.CIRCLE ->
-                mapDrawingManager?.circleList?.let {
-                    it.forEach {
-                        val titleParts = it.second.title.toString().split(" ")
-                        total += titleParts[0].toFloat()
-                    }
-//                    tv_size.text= String.format("%.2f sq. feet", total)
-                }
-
-            ShapeType.POINT ->
-                mapDrawingManager?.markerList?.let {
-                    it.size
-
-//                    tv_size.text= String.format("%d units", it.size)
-                }
-        }
-    }
-
-    override fun onClick(p0: View?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onShapeCompleted(shapeType: ShapeType, shapeId: String) {
-        updateShapeSizeTotal(shapeType)
-
-    }
-
-    override fun onShapeUpdated(shapeType: ShapeType, shapeId: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onAllShapeRemove() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onShapeRemoveAfter(deleted: Boolean) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onShapeRemoveBefore(shapeType: ShapeType, shapeIndex: Int, shapeCount: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onShapeRemoveModeEnabled(removeModeEnable: Boolean) {
-        TODO("Not yet implemented")
     }
 
     fun searchLocation(view: View) {
@@ -144,7 +135,11 @@ class AddPolygonSubak : AppCompatActivity(), View.OnClickListener, OnShapeRemove
         var addressList: List<Address>? = null
 
         if (location == "") {
-//            Toast.makeText(applicationContext, "provide location", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                applicationContext,
+                "Masukkan lokasi yang ingin dicari!",
+                Toast.LENGTH_SHORT
+            ).show()
         } else {
             val geoCoder = Geocoder(this)
             try {
@@ -152,24 +147,19 @@ class AddPolygonSubak : AppCompatActivity(), View.OnClickListener, OnShapeRemove
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-            val address = addressList!![0]
-            val latLng = LatLng(address.latitude, address.longitude)
-            mMap.addMarker(MarkerOptions().position(latLng).title(location))
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-            Toast.makeText(
-                applicationContext,
-                address.latitude.toString() + " " + address.longitude,
-                Toast.LENGTH_LONG
-            ).show()
 
-            val lat = address.latitude.toString()
-            val long = address.longitude.toString()
-
-            binding.btnSimpan.setOnClickListener {
-                val intent = Intent(this, AddDataUmum::class.java)
-                intent.putExtra("lat", lat)
-                intent.putExtra("long", long)
-                startActivity(intent)
+            if (addressList != null && addressList.isNotEmpty()) {
+                val address = addressList[0]
+                val latLng = LatLng(address.latitude, address.longitude)
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+                Toast.makeText(
+                    applicationContext,
+                    "Lokasi ditemukan!",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                Toast.makeText(applicationContext, "Lokasi tidak ditemukan!", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

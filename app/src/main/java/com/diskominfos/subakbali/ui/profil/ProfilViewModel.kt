@@ -14,6 +14,10 @@ class ProfilViewModel(private val pref: UserPreference): ViewModel() {
         return pref.getUser().asLiveData()
     }
 
+    fun getName(): LiveData<String> {
+        return pref.getName().asLiveData()
+    }
+
     fun logout() {
         viewModelScope.launch {
             pref.logout()

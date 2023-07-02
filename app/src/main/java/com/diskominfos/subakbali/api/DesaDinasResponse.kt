@@ -30,6 +30,32 @@ data class DataDesaDinas(
     @field:SerializedName("sub_district_id")
     val sub_district_id: String,
 
+    @field:SerializedName("sub_district")
+    val sub_district: DataKecamatanDesaDinas? = null,
+
     @field:SerializedName("district_id")
     val district_id: String,
+
+    @field:SerializedName("district")
+    val district: DataKabupatenDesaDinas? = null
+) : Parcelable
+
+@Parcelize
+data class DataKabupatenDesaDinas(
+    @PrimaryKey
+    @field:SerializedName("id")
+    val id: String,
+
+    @field:SerializedName("name")
+    val name: String
+) : Parcelable
+
+@Parcelize
+data class DataKecamatanDesaDinas(
+    @PrimaryKey
+    @field:SerializedName("id")
+    val id: String,
+
+    @field:SerializedName("name")
+    val name: String
 ) : Parcelable

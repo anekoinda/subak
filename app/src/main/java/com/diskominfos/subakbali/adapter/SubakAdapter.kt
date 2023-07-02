@@ -7,6 +7,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import com.diskominfos.subakbali.api.DataSubak
+import com.diskominfos.subakbali.api.DataTempSubak
 import com.diskominfos.subakbali.databinding.ItemSubakBinding
 
 class SubakAdapter(private val subakList: MutableList<DataSubak>) :

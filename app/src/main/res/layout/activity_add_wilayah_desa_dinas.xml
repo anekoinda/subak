@@ -29,52 +29,47 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Desa Dinas"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/spnDesaDinas"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:paddingStart="12dp"
-                    android:spinnerMode="dropdown"
-                    android:textSize="16sp"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Area Subak di Desa Dinas"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/textDesa"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/custom_input"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Pilih Desa Dinas"
+                        android:textSize="16sp" />
+                </RelativeLayout>
 
-                <FrameLayout
-                    android:id="@+id/container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLokasi"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_input"
-                    android:fontFamily="@font/poppins_regular"
-                    android:gravity="start|center_vertical"
-                    android:hint="Masukkan lokasi area subak"
-                    android:paddingStart="12dp"
-                    android:textSize="16sp" />
+                <EditText
+                    android:id="@+id/editTextSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -89,23 +84,27 @@
         android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBatal"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button_stroke"
             android:fontFamily="@font/poppins_medium"
-            android:text="BATAL"
-            android:textColor="@color/green" />
+            android:text="Batal"
+            android:textAllCaps="false"
+            android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSimpan"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button"
             android:fontFamily="@font/poppins_medium"
-            android:text="SIMPAN"
+            android:text="Simpan"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

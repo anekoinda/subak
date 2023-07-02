@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Subak Sawah"
+                    android:text="Subak Basah"
                     android:textColor="@color/black_font"
                     android:textSize="16sp" />
             </LinearLayout>

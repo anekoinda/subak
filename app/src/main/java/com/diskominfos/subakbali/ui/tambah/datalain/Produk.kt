@@ -1,60 +1,162 @@
 package com.diskominfos.subakbali.ui.tambah.datalain
 
+import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import com.diskominfos.subakbali.R
+import androidx.appcompat.app.AlertDialog
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.diskominfos.subakbali.DetailProduk
+import com.diskominfos.subakbali.adapter.ProdukAdapter
+import com.diskominfos.subakbali.adapter.SumberDanaAdapter
+import com.diskominfos.subakbali.api.*
+import com.diskominfos.subakbali.databinding.ActivityProdukBinding
+import com.diskominfos.subakbali.model.UserPreference
+import com.diskominfos.subakbali.model.ViewModelFactory
+import com.diskominfos.subakbali.ui.auth.LoginActivity
+import com.diskominfos.subakbali.ui.tambah.dataumum.AddDataUmumViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AddProduk.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Produk : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+class Produk : AppCompatActivity() {
+    private lateinit var binding: ActivityProdukBinding
+    private lateinit var addDataUmumViewModel: AddDataUmumViewModel
+    private val _produkList = MutableLiveData<MutableList<GetAllProduk>>()
+    val produkList: LiveData<MutableList<GetAllProduk>> = _produkList
+    private var getIdSubak: String? = ""
+    private var token: String = ""
+    private lateinit var setAdapterProduk: ProdukAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        binding = ActivityProdukBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        supportActionBar?.title = "Produk"
+
+        setupRecyclerProduk()
+        setupViewModel()
+
+        getIdSubak = intent.getStringExtra("idsubak") // Retrieve the string value from the Intent
+        Log.e("id sumber airrr", "$getIdSubak")
+        if (getIdSubak != null) {
+            val idtempsubak = getIdSubak
+            binding.btnAddProduk.setOnClickListener {
+                val builder = AlertDialog.Builder(this)
+                Log.e("id subak", "$getIdSubak")
+                val intent = Intent(this, AddProduk::class.java).apply {
+                    putExtra("idsubak", idtempsubak)
+                }
+                startActivity(intent)
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_produk, container, false)
+    private fun setupRecyclerProduk() {
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvProduk.layoutManager = layoutManager
+        binding.rvProduk.setHasFixedSize(true)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddProduk.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Produk().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun setupViewModel(){
+        addDataUmumViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(UserPreference.getInstance(dataStore))
+        )[AddDataUmumViewModel::class.java]
+        addDataUmumViewModel.getUser().observe(this) { it ->
+            token = it
+            if (it != "") {
+                getListProduk(it)
+                produkList.observe(this) { produk ->
+                    getList(produk)
+                    if (produk != null && produk.isNotEmpty()) {
+                        binding.emptyObjectProduk.visibility = View.GONE
+                    } else {
+                        binding.emptyObjectProduk.visibility = View.VISIBLE
+                    }
+                    Log.d("error", "set upViewModel: $produk")
+                }
+            } else {
+                val intent = Intent(this, LoginActivity::class.java)
+                this.startActivity(intent)
+            }
+        }
+    }
+
+    private fun getListProduk(token: String) {
+        val client = ApiConfig.getApiService().getListProduk("Bearer $token", "$getIdSubak")
+//        val client = ApiConfig.getApiService().getListTempSubakDesaAdat("Bearer $token")
+        Log.e("data id temp pura subak", "$getIdSubak")
+        client.enqueue(object : Callback<GetProdukResponse> {
+            override fun onResponse(call: Call<GetProdukResponse>, response: Response<GetProdukResponse>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        _produkList.value = response.body()?.data
+                    }
+
+                } else {
+                    Log.e(ContentValues.TAG, "onFailure : ${response.errorBody()}")
                 }
             }
+
+            override fun onFailure(call: Call<GetProdukResponse>, t: Throwable) {
+                Log.d(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+        })
+    }
+
+    private fun getList(produk: MutableList<GetAllProduk>) {
+        val produkAdapter = ProdukAdapter(produk,
+            object : ProdukAdapter.OnAdapterProdukListener {
+                override fun onClick(result: GetAllProduk) {
+                    val bundle = Bundle()
+                    val intent = Intent(this@Produk, DetailProduk::class.java)
+                    bundle.putString("id", result.id)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                }
+            }, token
+        )
+        binding.rvProduk.adapter = produkAdapter
+//        tempSubakAdapter.setOnClickCallBack(object : TempSubakAdapter.OnItemClickCallback {
+//            override fun onClick(data: DataTempSubak) {
+//                Intent(this@DraftSubak, DetailTempSubak::class.java).also {
+//                    it.putExtra("id", data.id)
+//                    Log.e("id frag", "$id")
+//                    startActivity(it)
+//                }
+//                val bundle = Bundle()
+//                val intent = Intent(this@DraftSubak, DetailTempSubak::class.java)
+//                bundle.putString("id", data.id)
+//                Log.e("id okama", data.id)
+//                intent.putExtras(bundle)
+//                startActivity(intent)
+//            }
+//        })
+
+        setAdapterProduk = produk.let {
+            ProdukAdapter(it,
+                object : ProdukAdapter.OnAdapterProdukListener {
+                    override fun onClick(result: GetAllProduk) {
+                        val bundle = Bundle()
+                        val intent = Intent(this@Produk, DetailProduk::class.java)
+                        bundle.putString("id", result.id)
+                        intent.putExtras(bundle)
+                        startActivity(intent)
+                    }
+                }, token)
+        }
     }
 }
