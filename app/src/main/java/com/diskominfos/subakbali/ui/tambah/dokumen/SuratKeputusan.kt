@@ -14,11 +14,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.diskominfos.subakbali.R
-import com.diskominfos.subakbali.adapter.AwigAdapter
 import com.diskominfos.subakbali.adapter.SuratKeputusanAdapter
 import com.diskominfos.subakbali.api.*
-import com.diskominfos.subakbali.databinding.ActivityAwigBinding
 import com.diskominfos.subakbali.databinding.ActivitySuratKeputusanBinding
 import com.diskominfos.subakbali.model.UserPreference
 import com.diskominfos.subakbali.model.ViewModelFactory
@@ -29,22 +26,22 @@ import retrofit2.Callback
 import retrofit2.Response
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-class Awig : AppCompatActivity() {
-    private lateinit var binding: ActivityAwigBinding
+class SuratKeputusan : AppCompatActivity() {
+    private lateinit var binding: ActivitySuratKeputusanBinding
     private lateinit var addDataUmumViewModel: AddDataUmumViewModel
-    private val _awigList = MutableLiveData<MutableList<GetAllAwig>>()
-    val awigList: LiveData<MutableList<GetAllAwig>> = _awigList
+    private val _suratKeputusanList = MutableLiveData<MutableList<GetAllSuratKeputusan>>()
+    val suratKeputusanList: LiveData<MutableList<GetAllSuratKeputusan>> = _suratKeputusanList
     private var getIdSubak: String? = ""
     private var token: String = ""
-    private lateinit var setAdapterAwig: AwigAdapter
+    private lateinit var setAdapterSuratKeputusan: SuratKeputusanAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAwigBinding.inflate(layoutInflater)
+        binding = ActivitySuratKeputusanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "Awig-Awig"
+        supportActionBar?.title = "Surat Keputusan"
 
-        setupRecyclerAwig()
+        setupRecyclerSuratKeputusan()
         setupViewModel()
 
         getIdSubak = intent.getStringExtra("idsubak") // Retrieve the string value from the Intent
@@ -54,9 +51,9 @@ class Awig : AppCompatActivity() {
 
         if (getIdSubak != null) {
             val idtempsubak = getIdSubak
-            binding.btnAddAwig.setOnClickListener {
+            binding.btnAddSuratKeputusan.setOnClickListener {
                 Log.e("id subak sk", "$getIdSubak")
-                val intent = Intent(this, AddAwig::class.java).apply {
+                val intent = Intent(this, AddSuratKeputusan::class.java).apply {
                     putExtra("idsubak", idtempsubak)
                 }
                 startActivity(intent)
@@ -68,7 +65,7 @@ class Awig : AppCompatActivity() {
             val idtempsubak = getIdSubak
             binding.btnLanjutkan.setOnClickListener {
                 Log.e("data id", "$getIdSubak")
-                val intent = Intent(this, Perarem::class.java).apply{
+                val intent = Intent(this, Awig::class.java).apply{
                     putExtra("idsubak", idtempsubak)
                 }
                 startActivity(intent)
@@ -77,10 +74,10 @@ class Awig : AppCompatActivity() {
         }
     }
 
-    private fun setupRecyclerAwig() {
+    private fun setupRecyclerSuratKeputusan() {
         val layoutManager = LinearLayoutManager(this)
-        binding.rvAwig.layoutManager = layoutManager
-        binding.rvAwig.setHasFixedSize(true)
+        binding.rvSk.layoutManager = layoutManager
+        binding.rvSk.setHasFixedSize(true)
     }
 
     private fun setupViewModel(){
@@ -91,16 +88,16 @@ class Awig : AppCompatActivity() {
         addDataUmumViewModel.getUser().observe(this) { it ->
             token = it
             if (it != "") {
-                getListAwig(it)
-                awigList.observe(this) { awig ->
-                    getList(awig)
-                    Log.d("error", "list awig: $awig")
-                    if (awig != null && awig.isNotEmpty()) {
-                        binding.emptyObjectAwig.visibility = View.GONE
+                getListSuratKeputusan(it)
+                suratKeputusanList.observe(this) { sk ->
+                    getList(sk)
+                    Log.d("error", "list sk: $sk")
+                    if (sk != null && sk.isNotEmpty()) {
+                        binding.emptyObjectSuratKeputusan.visibility = View.GONE
                     } else {
-                        binding.emptyObjectAwig.visibility = View.VISIBLE
+                        binding.emptyObjectSuratKeputusan.visibility = View.VISIBLE
                     }
-                    Log.d("error", "set upViewModel: $awig")
+                    Log.d("error", "set upViewModel: $sk")
                 }
             } else {
                 val intent = Intent(this, LoginActivity::class.java)
@@ -109,15 +106,15 @@ class Awig : AppCompatActivity() {
         }
     }
 
-    private fun getListAwig(token: String) {
-        val client = ApiConfig.getApiService().getListAwig("Bearer $token", "$getIdSubak")
+    private fun getListSuratKeputusan(token: String) {
+        val client = ApiConfig.getApiService().getListSuratKeputusan("Bearer $token", "$getIdSubak")
         Log.e("data id temp pura subak", "$getIdSubak")
-        client.enqueue(object : Callback<GetAwigResponse> {
-            override fun onResponse(call: Call<GetAwigResponse>, response: Response<GetAwigResponse>) {
+        client.enqueue(object : Callback<GetSuratKeputusanResponse> {
+            override fun onResponse(call: Call<GetSuratKeputusanResponse>, response: Response<GetSuratKeputusanResponse>) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        _awigList.value = response.body()?.data
+                        _suratKeputusanList.value = response.body()?.data
                     }
 
                 } else {
@@ -125,25 +122,25 @@ class Awig : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<GetAwigResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetSuratKeputusanResponse>, t: Throwable) {
                 Log.d(ContentValues.TAG, "onFailure: ${t.message}")
             }
         })
     }
 
-    private fun getList(awig: MutableList<GetAllAwig>) {
-        val awigAdapter = AwigAdapter(awig,
-            object : AwigAdapter.OnAdapterAwigListener {
-                override fun onClick(result: GetAllAwig) {
+    private fun getList(sk: MutableList<GetAllSuratKeputusan>) {
+        val suratKeputusanAdapter = SuratKeputusanAdapter(sk,
+            object : SuratKeputusanAdapter.OnAdapterSuratKeputusanListener {
+                override fun onClick(result: GetAllSuratKeputusan) {
                     val bundle = Bundle()
-                    val intent = Intent(this@Awig, DetailAwig::class.java)
+                    val intent = Intent(this@SuratKeputusan, DetailSuratKeputusan::class.java)
                     bundle.putString("id", result.id)
                     intent.putExtras(bundle)
                     startActivity(intent)
                 }
             }, token
         )
-        binding.rvAwig.adapter = awigAdapter
+        binding.rvSk.adapter = suratKeputusanAdapter
 //        tempSubakAdapter.setOnClickCallBack(object : TempSubakAdapter.OnItemClickCallback {
 //            override fun onClick(data: DataTempSubak) {
 //                Intent(this@DraftSubak, DetailTempSubak::class.java).also {
@@ -160,12 +157,12 @@ class Awig : AppCompatActivity() {
 //            }
 //        })
 
-        setAdapterAwig = awig.let {
-            AwigAdapter(it,
-                object : AwigAdapter.OnAdapterAwigListener {
-                    override fun onClick(result: GetAllAwig) {
+        setAdapterSuratKeputusan = sk.let {
+            SuratKeputusanAdapter(it,
+                object : SuratKeputusanAdapter.OnAdapterSuratKeputusanListener {
+                    override fun onClick(result: GetAllSuratKeputusan) {
                         val bundle = Bundle()
-                        val intent = Intent(this@Awig, DetailAwig::class.java)
+                        val intent = Intent(this@SuratKeputusan, DetailSuratKeputusan::class.java)
                         bundle.putString("id", result.id)
                         intent.putExtras(bundle)
                         startActivity(intent)

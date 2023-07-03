@@ -10,10 +10,9 @@ import com.diskominfos.subakbali.ui.tambah.datalain.AddAlihFungsi
 import com.diskominfos.subakbali.ui.tambah.datalain.AddUsaha
 import com.diskominfos.subakbali.ui.tambah.dataumum.AddDataUmum
 import com.diskominfos.subakbali.ui.tambah.datawilayah.AddDataWilayah
-import com.diskominfos.subakbali.ui.tambah.dokumen.AddDokumen
 import com.diskominfos.subakbali.ui.tambah.dokumen.Awig
 import com.diskominfos.subakbali.ui.tambah.dokumen.Perarem
-import com.diskominfos.subakbali.ui.tambah.dokumen.SuratKeterangan
+import com.diskominfos.subakbali.ui.tambah.dokumen.SuratKeputusan
 import com.diskominfos.subakbali.ui.tambah.krama.AddKrama
 import com.diskominfos.subakbali.ui.tambah.parahyangan.AddDataParahyangan
 import com.diskominfos.subakbali.ui.tambah.parahyangan.Tradisi
@@ -57,7 +56,7 @@ class ListData : AppCompatActivity() {
         }
 
         binding.dataSuratKeterangan.setOnClickListener {
-            val intent = Intent(this, SuratKeterangan::class.java)
+            val intent = Intent(this, SuratKeputusan::class.java)
             startActivity(intent)
         }
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_grey"
     android:orientation="vertical"
-    tools:context=".ui.tambah.dokumen.SuratKeterangan">
+    tools:context=".ui.tambah.dokumen.SuratKeputusan">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,12 +31,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Surat Keterangan"
+                    android:text="Surat Keputusan"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/btnAddSuratKeterangan"
+                    android:id="@+id/btnAddSuratKeputusan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -48,7 +48,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/emptyObjectSuratKeterangan"
+                android:id="@+id/emptyObjectSuratKeputusan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -81,7 +81,7 @@
                 android:layout_marginTop="8dp"
                 android:divider="@null"
                 android:dividerHeight="0dp"
-                tools:listitem="@layout/item_surat_keterangan" />
+                tools:listitem="@layout/item_surat_keputusan" />
         </LinearLayout>
     </ScrollView>
 

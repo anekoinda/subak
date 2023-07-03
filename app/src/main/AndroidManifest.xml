@@ -27,6 +27,48 @@
         android:theme="@style/Theme.SubakBali"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.tambah.dokumen.AddPerarem"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.dokumen.AddAwig"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.dokumen.DetailPerarem"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.dokumen.DetailAwig"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.dokumen.DetailSuratKeputusan"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.tambah.dokumen.AddSuratKeputusan"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.tambah.dokumen.Perarem"
             android:exported="false">
             <meta-data
@@ -34,7 +76,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.tambah.dokumen.SuratKeterangan"
+            android:name=".ui.tambah.dokumen.SuratKeputusan"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -231,14 +273,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.tambah.dokumen.AddDokumen"
-            android:exported="false"
-            android:theme="@style/Theme.SubakBali.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ui.tambah.sumberair.AddSumberAirSubak"
             android:exported="false">
             <meta-data
@@ -359,6 +393,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDeg6nPljLVx15aYfww-uBrTq9afsNjcN0" />

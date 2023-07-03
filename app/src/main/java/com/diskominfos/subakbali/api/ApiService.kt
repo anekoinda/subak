@@ -449,4 +449,58 @@ interface ApiService {
         @Path("subak_id") subak_id: String,
     ): Call<GetAlihFungsiResponse>
 
+    @Multipart
+    @POST("surat_keputusan/create")
+    fun addSuratKeputusan(
+        @Header("Authorization") token: String,
+        @Part("subak_id") subak_id: Int,
+        @Part("no_sk") no_sk: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+        @Part("tanggal") tanggal: RequestBody,
+        @Part("jabatan_penandatangan") jabatan_penandatangan: RequestBody,
+        @Part("jenis_jabatan_penandatangan") jenis_jabatan_penandatangan: RequestBody,
+    ): Call<SuratKeputusanResponse>
+
+    @GET("surat_keputusan/get-data/{subak_id}")
+    fun getListSuratKeputusan(
+        @Header("Authorization") token: String,
+        @Path("subak_id") subak_id: String,
+    ): Call<GetSuratKeputusanResponse>
+
+    @Multipart
+    @POST("awig/create")
+    fun addAwig(
+        @Header("Authorization") token: String,
+        @Part("subak_id") subak_id: Int,
+        @Part("judul") judul: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+        @Part("jenis") jenis: RequestBody,
+        @Part("tanggal_pengesahan") tanggal_pengesahan: RequestBody,
+        @Part("tanggal_berlaku") tanggal_berlaku: RequestBody,
+        @Part("tanggal_berhenti_berlaku") tanggal_berhenti_berlaku: RequestBody,
+    ): Call<AwigResponse>
+
+    @GET("awig/get-data/{subak_id}")
+    fun getListAwig(
+        @Header("Authorization") token: String,
+        @Path("subak_id") subak_id: String,
+    ): Call<GetAwigResponse>
+
+    @Multipart
+    @POST("perarem/create")
+    fun addPerarem(
+        @Header("Authorization") token: String,
+        @Part("subak_id") subak_id: Int,
+        @Part("judul") judul: RequestBody,
+        @Part("tipe") tipe: RequestBody,
+        @Part("jenis") jenis: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+    ): Call<PeraremResponse>
+
+    @GET("perarem/get-data/{subak_id}")
+    fun getListPerarem(
+        @Header("Authorization") token: String,
+        @Path("subak_id") subak_id: String,
+    ): Call<GetPeraremResponse>
 }

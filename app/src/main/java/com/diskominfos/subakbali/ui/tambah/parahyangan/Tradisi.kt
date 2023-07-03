@@ -27,6 +27,7 @@ import com.diskominfos.subakbali.ui.tambah.dataumum.AddDataUmumViewModel
 import com.diskominfos.subakbali.ui.tambah.dataumum.DetailTempSubak
 import com.diskominfos.subakbali.ui.tambah.datawilayah.AddDataWilayah
 import com.diskominfos.subakbali.ui.tambah.datawilayah.AddWilayahDesaDinas
+import com.diskominfos.subakbali.ui.tambah.dokumen.SuratKeputusan
 import com.diskominfos.subakbali.ui.tambah.parahyangan.AddTradisi
 import com.diskominfos.subakbali.ui.tambah.parahyangan.PuraViewModel
 import com.diskominfos.subakbali.ui.tambah.sumberdana.SumberDana
@@ -79,7 +80,7 @@ class Tradisi : AppCompatActivity() {
             binding.btnSimpan.setOnClickListener {
                 val builder = AlertDialog.Builder(this)
                 Log.e("data id", "$getIdSubak")
-                val intent = Intent(this, SumberDana::class.java).apply {
+                val intent = Intent(this, SuratKeputusan::class.java).apply {
                     putExtra("idsubak", idtempsubak)
                 }
                 startActivity(intent)
